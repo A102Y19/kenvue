@@ -1,24 +1,34 @@
 import os
 from pathlib import Path
 
-def list_downloads_folder():
-    download_path = Path.home() / "Downloads"
-    
-    if not download_path.exists():
-        print(f"Downloads folder not found: {download_path}")
-        return []
-    
-    files = os.listdir(download_path)
-    
-    if not files:
-        print(f"Downloads folder is empty: {download_path}")
-        return []
-    
-    print(f"Files in Downloads folder ({download_path}):")
-    for f in files:
-        print(f"  - {f}")
-    
-    return files
+def check_downloads_folder():
+    print("DEBUG DOWNLOADS FOLDER")
 
-# Usage
-list_downloads_folder()
+    # 1 Python home directory
+    home = Path.home()
+    print("Python home directory:", home)
+
+    # 2 Default Downloads folder
+    downloads = home / "Downloads"
+    print("Python default Downloads folder:", downloads)
+
+    # 3 Check if Downloads folder exists
+    if downloads.exists():
+        print("Downloads folder exists")
+        files = list(downloads.iterdir())
+        if files:
+            print("Files in Downloads folder:")
+            for f in files:
+                if f.suffix == ".crdownload":
+                    print(f.name, "still downloading")
+                else:
+                    print(f.name)
+        else:
+            print("Downloads folder is empty")
+    else:
+        print("Downloads folder does NOT exist")
+
+    print("END DEBUG")
+
+# Execute the function
+check_downloads_folder()
