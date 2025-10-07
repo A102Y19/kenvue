@@ -1,90 +1,49 @@
 import subprocess
 import socket
-import requests
 import time
 import os
 import logging
 from datetime import datetime
 
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[
-        #logging.FileHandler(log_filename),
-        logging.StreamHandler()
-    ]
+    handlers=[logging.StreamHandler()]
 )
 
-username = "JX2\SA-JX2-APSCOIT-MDPQA"
-#password = os.getenv('Agent_key')
+username = r"JX2\SA-JX2-APSCOIT-MDPQA"
+password = os.getenv("Agent_key")  # Set this in your environment before running
 
-# Get local machine name
 local_machine = socket.gethostname().upper()
 
-# Define tasks
 tasks = [
     ("VMCITSEUW006X", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA"),
     ("VMCITSEUW006X", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
     ("VMCITSEUW006Y", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
-	("VMCITSEUW006Z", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
-	("VMCITSEUW0070", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
-	("VMCITSEUW0071", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
+    ("VMCITSEUW006Z", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
+    ("VMCITSEUW0070", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
+    ("VMCITSEUW0071", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
 ]
 
 for machine, task in tasks:
-    logging.info(f"\n Running task on {machine}: {task}")
+    logging.info(f"Running task on {machine}: {task}")
 
     if machine.upper() == local_machine:
-        # Run without credentials on local machine
-        result = subprocess.run([
-            "schtasks.exe", "/run",
-            "/TN", task
-        ], capture_output=True, text=True)
+        result = subprocess.run(
+            ["schtasks.exe", "/run", "/TN", task],
+            capture_output=True, text=True
+        )
     else:
-        # Run with credentials on remote machines
-        result = subprocess.run([
-            "schtasks.exe", "/run",
-            "/S", machine,
-            "/U", username,
-            "/P", password,
-            "/TN", task
-        ], capture_output=True, text=True)
+        result = subprocess.run(
+            ["schtasks.exe", "/run", "/S", machine, "/U", username, "/P", password, "/TN", task],
+            capture_output=True, text=True
+        )
 
     if result.returncode != 0:
-        logging.info(f" Failed on {machine}: {result.stderr.strip()}")
+        logging.error(f"Failed on {machine}: {result.stderr.strip()}")
     else:
-        logging.info(f" Success on {machine}")
+        logging.info(f"Success on {machine}")
 
-    if machine == "VMCITSEUW006X":
-        time.sleep(10)
-
-# Wait and check dispatcher service
-#time.sleep(30)
-#url = "http://awsdmknvaw000m:8085/OMPDispatcher?wsdl"
-#
-#try:
-#    start = time.time()
-#    response = requests.get(url, timeout=10)
-#    end = time.time()
-#
-#    output = {
-#        "Time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-#        "Uri": url,
-#        "StatusCode": response.status_code,
-#        "StatusDescription": response.reason,
-#        "ResponseLength": len(response.content),
-#        "TimeTaken": int((end - start) * 1000)  # ms
-#    }
-#except requests.exceptions.RequestException as e:
-#    output = {
-#        "Time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-#        "Uri": url,
-#        "StatusCode": -1,
-#        "StatusDescription": str(e),
-#        "ResponseLength": 0,
-#        "TimeTaken": -1
-#    }
-
-logging.info("Dispatcher Health Check")
-#logging.info(output)
+    if "OMP_KNV_CO_MADRID_PQA" in task and "DSPAgent" not in task:
+        logging.info("Waiting 15 seconds before starting agents...")
+        time.sleep(15)
