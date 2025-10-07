@@ -1,18 +1,22 @@
-# CUSTOM DOWNLOAD FOLDER CONFIGURATION
-download_dir = r"D:\OMP Dump"
-os.makedirs(download_dir, exist_ok=True)
+def backup_local_variables():
+    try:
 
-options = webdriver.ChromeOptions()
-options.add_argument("--log-level=3")
 
-prefs = {
-    "download.default_directory": download_dir,
-    "download.prompt_for_download": False,
-    "download.directory_upgrade": True,
-    "safebrowsing.enabled": True
-}
-options.add_experimental_option("prefs", prefs)
+        # Timestamp for the new file name
+        #timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        dest_file = os.path.join(dest_dir, f"LocalVariables_{timestamp}.men")
 
-# HELPER FUNCTIONS
-def get_download_path():
-    return r"D:\OMP Dump"
+        # Copy the file
+        shutil.copy2(source_path, dest_file)
+
+        logging.info(f"File copied successfully to: {dest_file}")
+        print(f" Backup created: {dest_file}")
+
+    except Exception as e:
+        logging.error(f"Failed to backup file: {e}")
+        print(f" Failed to backup file: {e}")
+        sys.exit(1)
+
+
+dest_dir = r 
+script_path = r 
