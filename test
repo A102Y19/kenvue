@@ -1,50 +1,90 @@
-# ==============================
-# BACKUP D:\OMP Dump FOLDER BEFORE START (SAFE COPY)
-# ==============================
-def backup_OMP_DUMP(source_dir, backup_root_dir):
-    try:
-        logging.info(f"Starting backup of {source_dir}...")
-        os.makedirs(backup_root_dir, exist_ok=True)
-		
-        folder_name = os.path.basename(os.path.normpath(source_dir))
-		
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-
-        backup_folder_name = f"{folder_name}_{timestamp}"
-		
-        backup_folder = os.path.join(backup_root_dir, backup_folder_name)
-        os.makedirs(backup_folder, exist_ok=True)
-
-        # Walk through all files and folders
-        for root, dirs, files in os.walk(source_dir):
-            rel_path = os.path.relpath(root, source_dir)
-            target_root = os.path.join(backup_folder, rel_path)
-            os.makedirs(target_root, exist_ok=True)
-
-            for file in files:
-                src_file = os.path.join(root, file)
-                dest_file = os.path.join(target_root, file)
-                try:
-                    shutil.copy2(src_file, dest_file)
-                except Exception as e:
-                    logging.warning(f"Skipped file '{src_file}' due to error: {e}")
-
-        logging.info(f"Backup completed successfully: {backup_folder}")
-        print(f"Backup created: {backup_folder}")
-
-    except Exception as e:
-        logging.error(f"Failed to backup folder: {e}")
-        print(f"Failed to backup folder: {e}")
-        sys.exit(1)
+import subprocess
+import socket
+import requests
+import time
+import os
+import logging
+from datetime import datetime
 
 
-source_dir = r"D:\OMP Dump"
-backup_root_dir = r"D:\OMP Dump\Backup"
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        #logging.FileHandler(log_filename),
+        logging.StreamHandler()
+    ]
+)
 
-# Check source folder exists before calling backup
-if os.path.exists(source_dir):
-    backup_OMP_DUMP(source_dir, backup_root_dir)
-else:
-    logging.error(f"Source folder not found: {source_dir}. Exiting script.")
-    print(f"Source folder not found: {source_dir}. Exiting script.")
-    sys.exit(1)
+username = "JX2\SA-JX2-APSCOIT-MDPQA"
+#password = os.getenv('Agent_key')
+
+# Get local machine name
+local_machine = socket.gethostname().upper()
+
+# Define tasks
+tasks = [
+    ("VMCITSEUW006X", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA"),
+    ("VMCITSEUW006X", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
+    ("VMCITSEUW006Y", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
+	("VMCITSEUW006Z", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
+	("VMCITSEUW0070", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
+	("VMCITSEUW0071", r"OMP Dispatcher\OMP_KNV_CO_MADRID_PQA_DSPAgent"),
+]
+
+for machine, task in tasks:
+    logging.info(f"\n Running task on {machine}: {task}")
+
+    if machine.upper() == local_machine:
+        # Run without credentials on local machine
+        result = subprocess.run([
+            "schtasks.exe", "/run",
+            "/TN", task
+        ], capture_output=True, text=True)
+    else:
+        # Run with credentials on remote machines
+        result = subprocess.run([
+            "schtasks.exe", "/run",
+            "/S", machine,
+            "/U", username,
+            "/P", password,
+            "/TN", task
+        ], capture_output=True, text=True)
+
+    if result.returncode != 0:
+        logging.info(f" Failed on {machine}: {result.stderr.strip()}")
+    else:
+        logging.info(f" Success on {machine}")
+
+    if machine == "VMCITSEUW006X":
+        time.sleep(10)
+
+# Wait and check dispatcher service
+#time.sleep(30)
+#url = "http://awsdmknvaw000m:8085/OMPDispatcher?wsdl"
+#
+#try:
+#    start = time.time()
+#    response = requests.get(url, timeout=10)
+#    end = time.time()
+#
+#    output = {
+#        "Time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#        "Uri": url,
+#        "StatusCode": response.status_code,
+#        "StatusDescription": response.reason,
+#        "ResponseLength": len(response.content),
+#        "TimeTaken": int((end - start) * 1000)  # ms
+#    }
+#except requests.exceptions.RequestException as e:
+#    output = {
+#        "Time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#        "Uri": url,
+#        "StatusCode": -1,
+#        "StatusDescription": str(e),
+#        "ResponseLength": 0,
+#        "TimeTaken": -1
+#    }
+
+logging.info("Dispatcher Health Check")
+#logging.info(output)
