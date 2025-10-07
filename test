@@ -1,22 +1,23 @@
-def backup_local_variables():
+# ==============================
+# BACKUP D:\OMP Dump FOLDER BEFORE START
+# ==============================
+def backup_OMP_DUMP(source_dir, backup_root_dir):
     try:
-
-
-        # Timestamp for the new file name
-        #timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        dest_file = os.path.join(dest_dir, f"LocalVariables_{timestamp}.men")
-
-        # Copy the file
-        shutil.copy2(source_path, dest_file)
-
-        logging.info(f"File copied successfully to: {dest_file}")
-        print(f" Backup created: {dest_file}")
-
+        os.makedirs(backup_root_dir, exist_ok=True)
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        backup_folder = os.path.join(backup_root_dir, f"OMP_DUMP_Backup_{timestamp}")
+        shutil.copytree(source_dir, backup_folder)
+        logging.info(f"Folder backed up successfully to: {backup_folder}")
+        print(f"Backup created: {backup_folder}")
     except Exception as e:
-        logging.error(f"Failed to backup file: {e}")
-        print(f" Failed to backup file: {e}")
+        logging.error(f"Failed to backup folder: {e}")
+        print(f"Failed to backup folder: {e}")
         sys.exit(1)
 
-
-dest_dir = r 
-script_path = r 
+source_dir = r"D:\OMP Dump"
+backup_root_dir = r"D:\OMP Dump\Backup"
+if os.path.exists(source_dir):
+    backup_OMP_DUMP(source_dir, backup_root_dir)
+else:
+    os.makedirs(source_dir, exist_ok=True)
+    logging.info(f"{source_dir} did not exist, created new folder.")
