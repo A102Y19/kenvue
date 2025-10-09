@@ -1,10 +1,14 @@
+# --------------------------------------------------------
+# Main function: wait for Update Installer & Information (Robust Version)
+# --------------------------------------------------------
 def wait_for_update_installer_and_information():
     logging.info("Starting OMP monitoring process...")
 
     omp_window = get_stable_omp_window()
     if not omp_window:
-        logging.warning("OMP not detected. Will continue monitoring Information popup globally.")
+        logging.warning("OMP window not detected. Will continue monitoring Information popup globally.")
 
+    # --- Step 1: Wait for 'Update Installer' ---
     update_installer_found = False
     for attempt in range(6):
         if omp_window and not is_window_valid(omp_window):
@@ -17,17 +21,22 @@ def wait_for_update_installer_and_information():
                     name = pane.element_info.name.lower()
                     text = pane.window_text().lower()
                     if "update installer" in name or "update installer" in text:
-                        logging.info("Update Installer detected")
+                        logging.info(f"'Update Installer' detected on attempt {attempt+1}")
                         update_installer_found = True
                         break
                 if update_installer_found:
                     break
-            except:
-                logging.warning("Error scanning OMP panes")
+            except Exception as e:
+                logging.warning(f"Error scanning OMP panes: {e}")
+
         logging.info(f"Update Installer not found, retrying 10s (Attempt {attempt+1}/6)")
         time.sleep(10)
 
-    logging.info("Monitoring Information popup globally every 60s...")
+    if not update_installer_found:
+        logging.info("Update Installer not found after retries. Continuing anyway...")
+
+    # --- Step 2: Wait for 'Information' popup globally ---
+    logging.info("Monitoring Information popup globally every 10-60 seconds...")
     while True:
         try:
             # Scan all top-level windows
@@ -37,21 +46,30 @@ def wait_for_update_installer_and_information():
                 if "information" in title:
                     logging.info(f"Information popup detected: {title}")
                     pyautogui.press("enter")
-                    logging.info("ENTER sent to close popup")
+                    logging.info("ENTER sent to close popup.")
 
-                    # Check for Notepad
+                    # --- Step 3: Check for Notepad ---
                     notepad_found = False
                     start_time = time.time()
-                    while time.time() - start_time < 60:
-                        for nw in Desktop(backend="uia").windows():
+                    timeout = 60
+                    while time.time() - start_time < timeout:
+                        all_windows = Desktop(backend="uia").windows()
+                        for nw in all_windows:
                             if "notepad" in nw.window_text().lower():
+                                logging.info("Notepad window detected after ENTER.")
                                 handle_notepad_if_opened(nw)
                                 notepad_found = True
                                 break
                         if notepad_found:
                             break
                         time.sleep(5)
-                    return
+
+                    if not notepad_found:
+                        logging.info("No Notepad found. Installation likely completed.")
+                        time.sleep(10)
+
+                    return  # Exit function after handling popup
         except Exception as e:
-            logging.error(f"Error scanning global windows: {e}")
-        time.sleep(60)
+            logging.error(f"Error scanning top-level windows: {e}")
+
+        time.sleep(10)
