@@ -7,7 +7,6 @@ foreach ($server in Get-Content $ServerList) {
         Invoke-Command -ComputerName $server -ScriptBlock {
             param($TaskFolder)
 
-            # Get all tasks
             $tasks = Get-ScheduledTask | Where-Object { $_.TaskPath -like "*\$TaskFolder*" }
 
             if ($tasks) {
@@ -15,17 +14,12 @@ foreach ($server in Get-Content $ServerList) {
                     $taskName = $task.TaskName
                     $taskPath = $task.TaskPath
 
-                    Start-ScheduledTask -TaskName $taskName -TaskPath $taskPath -ErrorAction SilentlyContinue
-
-                    # Verify status
-                    $status = (Get-ScheduledTaskInfo -TaskName $taskName -TaskPath $taskPath).State
-
-                    if ($status -eq "Running") {
-                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' started successfully." -ForegroundColor Green
-                    } elseif ($status -eq "Ready") {
-                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' did NOT start." -ForegroundColor Red
-                    } else {
-                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' status: $status" -ForegroundColor Yellow
+                    try {
+                        Start-ScheduledTask -TaskName $taskName -TaskPath $taskPath -ErrorAction Stop
+                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' triggered successfully." -ForegroundColor Green
+                    }
+                    catch {
+                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' could NOT start. Error: $_" -ForegroundColor Red
                     }
                 }
             } else {
@@ -34,7 +28,7 @@ foreach ($server in Get-Content $ServerList) {
         } -ArgumentList $TaskFolder -ErrorAction Stop
     }
     catch {
-        Write-Host "[$server] - Failed to run tasks. Error: $_" -ForegroundColor Red
+        Write-Host "[$server] - Failed to connect/run tasks. Error: $_" -ForegroundColor Red
     }
 }
 
