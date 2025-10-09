@@ -1,24 +1,60 @@
-omp_window = get_stable_omp_window()
-if not omp_window:
-    logging.warning("OMP window not detected. Retrying in background...")
+# Path to server list file
+$ServerList = "\\awsusdmjfsxn01.jnj.com\eth_qa2_omp\Task_Scheduler\Server_list.txt"
 
-while True:
-    if omp_window and not is_window_valid(omp_window):
-        omp_window = get_stable_omp_window()
+# ===============================
+# Bulk Disable Scheduled Task
+# ===============================
 
-    if omp_window:
-        try:
-            panes = omp_window.descendants()
-            for pane in panes:
-                name = pane.element_info.name.lower()
-                text = pane.window_text().lower()
-                if "information" in name or "information" in text:
-                    logging.info(f"Information popup found: {text}")
-                    pyautogui.press("enter")
-                    logging.info("ENTER sent to close popup.")
-                    # Handle Notepad if opened
-                    return
-        except Exception as e:
-            logging.warning(f"Error scanning OMP window descendants: {e}")
+# Task details
+$TaskName = "Agent_Monitoring"
+$TaskPath = "\Agent\"   # very important (from your screenshot)
 
-    time.sleep(10)  # Retry every 10 seconds
+# Output log file (CSV report)
+$ReportFile = "\\awsusdmjfsxn01.jnj.com\eth_qa2_omp\Task_Scheduler\DisableTaskReport.csv"
+
+# Empty array for results
+$Results = @()
+
+# Loop through each server
+foreach ($server in Get-Content $ServerList) {
+    Write-Host "Processing server: $server ..." -ForegroundColor Cyan
+    try {
+        $result = Invoke-Command -ComputerName $server -ScriptBlock {
+            param($TaskName, $TaskPath)
+
+            $task = Get-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -ErrorAction SilentlyContinue
+            if ($null -ne $task) {
+                Disable-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -ErrorAction Stop
+                return "Disabled"
+            } else {
+                return "Not Found"
+            }
+        } -ArgumentList $TaskName, $TaskPath -ErrorAction Stop
+
+        # Save result
+        $Results += [PSCustomObject]@{
+            Server   = $server
+            TaskName = $TaskName
+            Status   = $result
+        }
+
+        if ($result -eq "Disabled") {
+            Write-Host "[$server] - Task '$TaskName' disabled successfully." -ForegroundColor Green
+        } elseif ($result -eq "Not Found") {
+            Write-Host "[$server] - Task '$TaskName' not found." -ForegroundColor Yellow
+        }
+    }
+    catch {
+        Write-Host "[$server] - Failed to disable task '$TaskName'. Error: $_" -ForegroundColor Red
+        $Results += [PSCustomObject]@{
+            Server   = $server
+            TaskName = $TaskName
+            Status   = "Error: $_"
+        }
+    }
+}
+
+# Export final report
+$Results | Export-Csv -Path $ReportFile -NoTypeInformation -Force
+
+Write-Host "All done! Report saved to $ReportFile" -ForegroundColor Cyan
