@@ -1,75 +1,24 @@
-# --------------------------------------------------------
-# Main function: wait for Update Installer & Information (Robust Version)
-# --------------------------------------------------------
-def wait_for_update_installer_and_information():
-    logging.info("Starting OMP monitoring process...")
+omp_window = get_stable_omp_window()
+if not omp_window:
+    logging.warning("OMP window not detected. Retrying in background...")
 
-    omp_window = get_stable_omp_window()
-    if not omp_window:
-        logging.warning("OMP window not detected. Will continue monitoring Information popup globally.")
+while True:
+    if omp_window and not is_window_valid(omp_window):
+        omp_window = get_stable_omp_window()
 
-    # --- Step 1: Wait for 'Update Installer' ---
-    update_installer_found = False
-    for attempt in range(6):
-        if omp_window and not is_window_valid(omp_window):
-            omp_window = get_stable_omp_window()
-
-        if omp_window:
-            try:
-                panes = omp_window.descendants()
-                for pane in panes:
-                    name = pane.element_info.name.lower()
-                    text = pane.window_text().lower()
-                    if "update installer" in name or "update installer" in text:
-                        logging.info(f"'Update Installer' detected on attempt {attempt+1}")
-                        update_installer_found = True
-                        break
-                if update_installer_found:
-                    break
-            except Exception as e:
-                logging.warning(f"Error scanning OMP panes: {e}")
-
-        logging.info(f"Update Installer not found, retrying 10s (Attempt {attempt+1}/6)")
-        time.sleep(10)
-
-    if not update_installer_found:
-        logging.info("Update Installer not found after retries. Continuing anyway...")
-
-    # --- Step 2: Wait for 'Information' popup globally ---
-    logging.info("Monitoring Information popup globally every 10-60 seconds...")
-    while True:
+    if omp_window:
         try:
-            # Scan all top-level windows
-            windows = Desktop(backend="uia").windows()
-            for win in windows:
-                title = win.window_text().lower()
-                if "information" in title:
-                    logging.info(f"Information popup detected: {title}")
+            panes = omp_window.descendants()
+            for pane in panes:
+                name = pane.element_info.name.lower()
+                text = pane.window_text().lower()
+                if "information" in name or "information" in text:
+                    logging.info(f"Information popup found: {text}")
                     pyautogui.press("enter")
                     logging.info("ENTER sent to close popup.")
-
-                    # --- Step 3: Check for Notepad ---
-                    notepad_found = False
-                    start_time = time.time()
-                    timeout = 60
-                    while time.time() - start_time < timeout:
-                        all_windows = Desktop(backend="uia").windows()
-                        for nw in all_windows:
-                            if "notepad" in nw.window_text().lower():
-                                logging.info("Notepad window detected after ENTER.")
-                                handle_notepad_if_opened(nw)
-                                notepad_found = True
-                                break
-                        if notepad_found:
-                            break
-                        time.sleep(5)
-
-                    if not notepad_found:
-                        logging.info("No Notepad found. Installation likely completed.")
-                        time.sleep(10)
-
-                    return  # Exit function after handling popup
+                    # Handle Notepad if opened
+                    return
         except Exception as e:
-            logging.error(f"Error scanning top-level windows: {e}")
+            logging.warning(f"Error scanning OMP window descendants: {e}")
 
-        time.sleep(10)
+    time.sleep(10)  # Retry every 10 seconds
