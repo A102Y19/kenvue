@@ -4,48 +4,33 @@ $ServerList = "\\awsusdmjfsxn01.jnj.com\eth_qa2_omp\Task_Scheduler\Server_list.t
 # Task folder path
 $TaskPath = "\OMP Dispatcher\"   # updated folder
 
-# Output log file (CSV report)
-$ReportFile = "\\awsusdmjfsxn01.jnj.com\eth_qa2_omp\Task_Scheduler\RunTasksReport.csv"
-
-# Empty array for results
-$Results = @()
-
 # Loop through each server
 foreach ($server in Get-Content $ServerList) {
     Write-Host "Processing server: $server ..." -ForegroundColor Cyan
     try {
-        $result = Invoke-Command -ComputerName $server -ScriptBlock {
+        Invoke-Command -ComputerName $server -ScriptBlock {
             param($TaskPath)
 
             $tasks = Get-ScheduledTask -TaskPath $TaskPath -ErrorAction SilentlyContinue
             if ($tasks) {
                 foreach ($task in $tasks) {
-                    Start-ScheduledTask -TaskName $task.TaskName -TaskPath $TaskPath
+                    # Check if the task is already running
+                    $status = (Get-ScheduledTaskInfo -TaskName $task.TaskName -TaskPath $TaskPath).State
+                    if ($status -ne "Running") {
+                        Start-ScheduledTask -TaskName $task.TaskName -TaskPath $TaskPath
+                        Write-Host "[$env:COMPUTERNAME] - Task '$($task.TaskName)' started successfully." -ForegroundColor Green
+                    } else {
+                        Write-Host "[$env:COMPUTERNAME] - Task '$($task.TaskName)' is already running." -ForegroundColor Yellow
+                    }
                 }
-                return $tasks.TaskName -join ", "
             } else {
-                return "No Tasks Found"
+                Write-Host "[$env:COMPUTERNAME] - No tasks found in folder '$TaskPath'." -ForegroundColor Yellow
             }
         } -ArgumentList $TaskPath -ErrorAction Stop
-
-        # Save result
-        $Results += [PSCustomObject]@{
-            Server   = $server
-            TasksRun = $result
-        }
-
-        Write-Host "[$server] - Tasks run: $result" -ForegroundColor Green
     }
     catch {
         Write-Host "[$server] - Failed to run tasks. Error: $_" -ForegroundColor Red
-        $Results += [PSCustomObject]@{
-            Server   = $server
-            TasksRun = "Error: $_"
-        }
     }
 }
 
-# Export final report
-$Results | Export-Csv -Path $ReportFile -NoTypeInformation -Force
-
-Write-Host "All done! Report saved to $ReportFile" -ForegroundColor Cyan
+Write-Host "All done!" -ForegroundColor Cyan
