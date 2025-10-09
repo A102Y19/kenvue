@@ -14,9 +14,22 @@ foreach ($server in Get-Content $ServerList) {
                     $taskName = $task.TaskName
                     $taskPath = $task.TaskPath
 
+                    # Get last run time before triggering
+                    $lastRunBefore = (Get-ScheduledTaskInfo -TaskName $taskName -TaskPath $taskPath).LastRunTime
+
+                    # Trigger the task
                     try {
                         Start-ScheduledTask -TaskName $taskName -TaskPath $taskPath -ErrorAction Stop
-                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' triggered successfully." -ForegroundColor Green
+                        Start-Sleep -Seconds 5   # give it a few seconds to actually start
+                        
+                        # Get last run time after triggering
+                        $lastRunAfter = (Get-ScheduledTaskInfo -TaskName $taskName -TaskPath $taskPath).LastRunTime
+
+                        if ($lastRunAfter -gt $lastRunBefore) {
+                            Write-Host "[$env:COMPUTERNAME] - Task '$taskName' ran successfully at $lastRunAfter." -ForegroundColor Green
+                        } else {
+                            Write-Host "[$env:COMPUTERNAME] - Task '$taskName' did NOT run." -ForegroundColor Red
+                        }
                     }
                     catch {
                         Write-Host "[$env:COMPUTERNAME] - Task '$taskName' could NOT start. Error: $_" -ForegroundColor Red
