@@ -1,8 +1,8 @@
-# Path to server list file
-$ServerList = "\\awsusdmjfsxn01.jnj.com\eth_qa2_omp\Task_Scheduler\Server_list.txt"
+PS C:\Windows\system32> # Path to server list file
+$ServerList = "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\task_start\Server_list.txt"
 
 # Task folder path
-$TaskPath = "\OMP Dispatcher\"   # updated folder
+$TaskPath = "\Agent_Monitoring\"   # updated folder
 
 # Loop through each server
 foreach ($server in Get-Content $ServerList) {
@@ -40,3 +40,9 @@ foreach ($server in Get-Content $ServerList) {
 }
 
 Write-Host "All done!" -ForegroundColor Cyan
+Processing server: AWSDMKNVAW0002 ...
+[AWSDMKNVAW0002] - Task 'Agent_Monitor' status: 
+[AWSDMKNVAW0002] - Task 'Atom_Test' status: 
+All done!
+
+PS C:\Windows\system32> 
