@@ -1,88 +1,115 @@
-def wait_for_update_installer_and_information():
-    logging.info("Searching for 'OMP Data Change Manager' window...")
+import time
+import logging
+import re
+import sys
+import pyautogui
+from pywinauto import Desktop
 
-    omp_window = None
-    while omp_window is None:
+# --------------------------------------------------------
+# Helper: detect OMP window using both backends + regex
+# --------------------------------------------------------
+def find_omp_window():
+    for backend in ["uia", "win32"]:
         try:
-            windows = Desktop(backend="uia").windows()
+            windows = Desktop(backend=backend).windows()
             for win in windows:
-                title = win.window_text()
-                logging.info(f"Window found: {title}")
-                if "OMP Data Change Manager" in title:
-                    omp_window = win
-                    logging.info("OMP main window found.")
-                    break
+                title = win.window_text().strip()
+                if re.search(r"OMP\s*Data\s*Change\s*Manager", title, re.IGNORECASE):
+                    logging.info(f"OMP window found using backend={backend} | title={title}")
+                    return win
         except Exception as e:
-            logging.error(f"Error finding OMP window: {e}")
-        time.sleep(5)
+            logging.warning(f"Window scan failed (backend={backend}): {e}")
+            continue
+    return None
 
-    # Wait for 'Update Installer' to appear
+# --------------------------------------------------------
+# Helper: check if window handle is still valid
+# --------------------------------------------------------
+def is_window_valid(win):
+    try:
+        _ = win.element_info.name
+        return True
+    except Exception:
+        return False
+
+# --------------------------------------------------------
+# Helper: continuously get a valid OMP window
+# --------------------------------------------------------
+def get_stable_omp_window(max_retries=15, wait_sec=5):
+    omp_window = None
+    for attempt in range(max_retries):
+        omp_window = find_omp_window()
+        if omp_window:
+            time.sleep(2)
+            if is_window_valid(omp_window):
+                logging.info(f"Stable OMP window detected (attempt {attempt+1})")
+                return omp_window
+        logging.info(f"OMP window not detected (attempt {attempt+1}/{max_retries}). Retrying in {wait_sec}s...")
+        time.sleep(wait_sec)
+    logging.error("Failed to detect OMP Data Change Manager window after multiple retries.")
+    return None
+
+# --------------------------------------------------------
+# Main function: wait for Update Installer & Information
+# --------------------------------------------------------
+def wait_for_update_installer_and_information():
+    logging.info("Starting OMP monitoring process...")
+
+    omp_window = get_stable_omp_window()
+    if not omp_window:
+        logging.warning("OMP Data Change Manager not found. Proceeding without window reference.")
+        return
+
+    # --- Step 2: Wait for 'Update Installer' ---
     logging.info("Looking for 'Update Installer' in OMP window...")
     update_installer_found = False
-    attempts = 0
-    max_attempts = 4
-    while not update_installer_found and attempts < max_attempts:
+    for attempt in range(6):  # check 6 times (about 1 minute total)
+        if not is_window_valid(omp_window):
+            omp_window = get_stable_omp_window()
+            if not omp_window:
+                break
+
         try:
             panes = omp_window.descendants()
             for pane in panes:
-                try:
-                    name = pane.element_info.name
-                    text = pane.window_text()
-                    if "Update Installer" in name or "Update Installer" in text:
-                        logging.info(f"'Update Installer' found: {name}")
-                        update_installer_found = True
-                        break
-                except Exception as pane_error:
-                    logging.warning(f"Pane info fetch failed: {pane_error}")
+                name = pane.element_info.name
+                text = pane.window_text()
+                if "update installer" in name.lower() or "update installer" in text.lower():
+                    logging.info(f"'Update Installer' detected on attempt {attempt+1}")
+                    update_installer_found = True
+                    break
+            if update_installer_found:
+                break
         except Exception as e:
-            logging.error(f"Error during Update Installer search: {e}")
+            logging.warning(f"Error checking Update Installer: {e}")
+        logging.info(f"Update Installer not found. Retrying in 10s... (Attempt {attempt+1}/6)")
+        time.sleep(10)
 
-        if not update_installer_found:
-            attempts += 1
-            logging.info("Update Installer not found yet. Retrying in 10 seconds..(Attempt {attempts}/{max_attempts})")
-            time.sleep(10)
     if not update_installer_found:
-        logging.info("Update Installer not found after maximum attempts. Proceeding with the next steps.")
+        logging.info("Update Installer not found after all retries. Continuing...")
 
-    # Wait for 'Information' popup and handle it
+    # --- Step 3: Wait for 'Information' popup ---
     logging.info("Waiting for 'Information' popup every 60 seconds...")
     while True:
+        if not is_window_valid(omp_window):
+            omp_window = get_stable_omp_window()
+            if not omp_window:
+                logging.error("Lost OMP window completely. Exiting monitor.")
+                break
+
         try:
             panes = omp_window.descendants()
             for pane in panes:
-                try:
-                    name = pane.element_info.name
-                    text = pane.window_text()
-                    if "Information" in name or "Information" in text:
-                        logging.info(f"'Information' popup found: {text}")
-                        pyautogui.press('enter')
-                        logging.info("ENTER sent to close popup.")
-
-                        # Check for Notepad after ENTER
-                        notepad_found = False
-                        start_time = time.time()
-                        timeout = 60
-
-                        while time.time() - start_time < timeout:
-                            windows = Desktop(backend="uia").windows()
-                            for win in windows:
-                                if "Notepad" in win.window_text():
-                                    logging.info("Notepad window found.")
-                                    notepad_found = True
-                                    handle_notepad_if_opened(win)
-                                    break
-                            if notepad_found:
-                                break
-                            time.sleep(5)
-                            
-                        if not notepad_found:
-                            logging.info("Installation completed. No Notepad found.")
-                            time.sleep(60)
-                        return
-                except Exception as info_error:
-                    logging.warning(f"Error checking Information pane: {info_error}")
-                    sys.exit("Exiting script due to error in checking Information pane.")
+                name = pane.element_info.name
+                text = pane.window_text()
+                if "information" in name.lower() or "information" in text.lower():
+                    logging.info(f"'Information' popup detected: {text}")
+                    pyautogui.press("enter")
+                    logging.info("ENTER key sent to close Information popup.")
+                    logging.info("Installation likely completed.")
+                    return
         except Exception as e:
-            logging.error(f"Error while checking for Information popup: {e}")
-            sys.exit("Exiting script due to error while checking Information popup.")
+            logging.warning(f"Error while checking for Information popup: {e}")
+
+        logging.info("No Information popup yet. Checking again in 60s...")
         time.sleep(60)
