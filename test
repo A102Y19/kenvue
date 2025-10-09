@@ -1,16 +1,11 @@
 # Path to server list file
 $ServerList = "\\awsusdmjfsxn01.jnj.com\eth_qa2_omp\Task_Scheduler\Server_list.txt"
 
-# ===============================
-# Bulk Disable Scheduled Task
-# ===============================
-
-# Task details
-$TaskName = "Agent_Monitoring"
-$TaskPath = "\Agent\"   # very important (from your screenshot)
+# Task folder path
+$TaskPath = "\OMP Dispatcher\"   # updated folder
 
 # Output log file (CSV report)
-$ReportFile = "\\awsusdmjfsxn01.jnj.com\eth_qa2_omp\Task_Scheduler\DisableTaskReport.csv"
+$ReportFile = "\\awsusdmjfsxn01.jnj.com\eth_qa2_omp\Task_Scheduler\RunTasksReport.csv"
 
 # Empty array for results
 $Results = @()
@@ -20,36 +15,32 @@ foreach ($server in Get-Content $ServerList) {
     Write-Host "Processing server: $server ..." -ForegroundColor Cyan
     try {
         $result = Invoke-Command -ComputerName $server -ScriptBlock {
-            param($TaskName, $TaskPath)
+            param($TaskPath)
 
-            $task = Get-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -ErrorAction SilentlyContinue
-            if ($null -ne $task) {
-                Disable-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -ErrorAction Stop
-                return "Disabled"
+            $tasks = Get-ScheduledTask -TaskPath $TaskPath -ErrorAction SilentlyContinue
+            if ($tasks) {
+                foreach ($task in $tasks) {
+                    Start-ScheduledTask -TaskName $task.TaskName -TaskPath $TaskPath
+                }
+                return $tasks.TaskName -join ", "
             } else {
-                return "Not Found"
+                return "No Tasks Found"
             }
-        } -ArgumentList $TaskName, $TaskPath -ErrorAction Stop
+        } -ArgumentList $TaskPath -ErrorAction Stop
 
         # Save result
         $Results += [PSCustomObject]@{
             Server   = $server
-            TaskName = $TaskName
-            Status   = $result
+            TasksRun = $result
         }
 
-        if ($result -eq "Disabled") {
-            Write-Host "[$server] - Task '$TaskName' disabled successfully." -ForegroundColor Green
-        } elseif ($result -eq "Not Found") {
-            Write-Host "[$server] - Task '$TaskName' not found." -ForegroundColor Yellow
-        }
+        Write-Host "[$server] - Tasks run: $result" -ForegroundColor Green
     }
     catch {
-        Write-Host "[$server] - Failed to disable task '$TaskName'. Error: $_" -ForegroundColor Red
+        Write-Host "[$server] - Failed to run tasks. Error: $_" -ForegroundColor Red
         $Results += [PSCustomObject]@{
             Server   = $server
-            TaskName = $TaskName
-            Status   = "Error: $_"
+            TasksRun = "Error: $_"
         }
     }
 }
