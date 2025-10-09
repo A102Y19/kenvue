@@ -14,13 +14,19 @@ foreach ($server in Get-Content $ServerList) {
             $tasks = Get-ScheduledTask -TaskPath $TaskPath -ErrorAction SilentlyContinue
             if ($tasks) {
                 foreach ($task in $tasks) {
-                    # Check if the task is already running
-                    $status = (Get-ScheduledTaskInfo -TaskName $task.TaskName -TaskPath $TaskPath).State
-                    if ($status -ne "Running") {
-                        Start-ScheduledTask -TaskName $task.TaskName -TaskPath $TaskPath
-                        Write-Host "[$env:COMPUTERNAME] - Task '$($task.TaskName)' started successfully." -ForegroundColor Green
+                    $taskName = $task.TaskName
+                    # Start task
+                    Start-ScheduledTask -TaskName $taskName -TaskPath $TaskPath -ErrorAction SilentlyContinue
+
+                    # Check actual status
+                    $status = (Get-ScheduledTaskInfo -TaskName $taskName -TaskPath $TaskPath).State
+
+                    if ($status -eq "Running") {
+                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' started successfully." -ForegroundColor Green
+                    } elseif ($status -eq "Ready") {
+                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' did NOT start." -ForegroundColor Red
                     } else {
-                        Write-Host "[$env:COMPUTERNAME] - Task '$($task.TaskName)' is already running." -ForegroundColor Yellow
+                        Write-Host "[$env:COMPUTERNAME] - Task '$taskName' status: $status" -ForegroundColor Yellow
                     }
                 }
             } else {
