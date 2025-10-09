@@ -1,25 +1,24 @@
-PS C:\Windows\system32> # Path to server list file
 $ServerList = "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\task_start\Server_list.txt"
+$TaskFolder = "Agent_Monitoring"
 
-# Task folder path
-$TaskPath = "\Agent_Monitoring\"   # updated folder
-
-# Loop through each server
 foreach ($server in Get-Content $ServerList) {
     Write-Host "Processing server: $server ..." -ForegroundColor Cyan
     try {
         Invoke-Command -ComputerName $server -ScriptBlock {
-            param($TaskPath)
+            param($TaskFolder)
 
-            $tasks = Get-ScheduledTask -TaskPath $TaskPath -ErrorAction SilentlyContinue
+            # Get all tasks
+            $tasks = Get-ScheduledTask | Where-Object { $_.TaskPath -like "*\$TaskFolder*" }
+
             if ($tasks) {
                 foreach ($task in $tasks) {
                     $taskName = $task.TaskName
-                    # Start task
-                    Start-ScheduledTask -TaskName $taskName -TaskPath $TaskPath -ErrorAction SilentlyContinue
+                    $taskPath = $task.TaskPath
 
-                    # Check actual status
-                    $status = (Get-ScheduledTaskInfo -TaskName $taskName -TaskPath $TaskPath).State
+                    Start-ScheduledTask -TaskName $taskName -TaskPath $taskPath -ErrorAction SilentlyContinue
+
+                    # Verify status
+                    $status = (Get-ScheduledTaskInfo -TaskName $taskName -TaskPath $taskPath).State
 
                     if ($status -eq "Running") {
                         Write-Host "[$env:COMPUTERNAME] - Task '$taskName' started successfully." -ForegroundColor Green
@@ -30,9 +29,9 @@ foreach ($server in Get-Content $ServerList) {
                     }
                 }
             } else {
-                Write-Host "[$env:COMPUTERNAME] - No tasks found in folder '$TaskPath'." -ForegroundColor Yellow
+                Write-Host "[$env:COMPUTERNAME] - No tasks found in folder '$TaskFolder'." -ForegroundColor Yellow
             }
-        } -ArgumentList $TaskPath -ErrorAction Stop
+        } -ArgumentList $TaskFolder -ErrorAction Stop
     }
     catch {
         Write-Host "[$server] - Failed to run tasks. Error: $_" -ForegroundColor Red
@@ -40,9 +39,3 @@ foreach ($server in Get-Content $ServerList) {
 }
 
 Write-Host "All done!" -ForegroundColor Cyan
-Processing server: AWSDMKNVAW0002 ...
-[AWSDMKNVAW0002] - Task 'Agent_Monitor' status: 
-[AWSDMKNVAW0002] - Task 'Atom_Test' status: 
-All done!
-
-PS C:\Windows\system32> 
