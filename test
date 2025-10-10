@@ -1,21 +1,19 @@
 PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
 [DEBUG] Reading input file...
-Get-Content : Access is denied
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:4 char:9
-+ $data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automatio ...
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : PermissionDenied: (\\awsusdmlfsxn0...log\servers.txt:String) [Get-Content], UnauthorizedAccessException
-    + FullyQualifiedErrorId : ItemExistsUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetContentCommand
- 
-Get-Content : Cannot find path '\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt' because it does not exist.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:4 char:9
-+ $data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automatio ...
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : ObjectNotFound: (\\awsusdmlfsxn0...log\servers.txt:String) [Get-Content], ItemNotFoundException
-    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
- 
-[DEBUG] Total lines read from file: 0
+[DEBUG] Total lines read from file: 1
 [DEBUG] Host Machine : AWSDMKNVAW0002
 [DEBUG] Host OSUSER  : SA-ITS-APSMDINT-LAB
+
+=============================
+[DEBUG] Processing MACHINE : AWSDMKNVAW0002
+[DEBUG] Target OSUSER      : admin_vpasupu1
+[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
+[DEBUG] Querying processes on AWSDMKNVAW0002 ...
+[MATCH] Admin_VPasupu1 running schematic 'OMP_JNJ_MD_ATOM_LAB_UTL' (PID: 3752)
+[WARN] Failed to read owner for PID 30800 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[WARN] Failed to read owner for PID 29608 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[WARN] Failed to read owner for PID 1440 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[DEBUG] Attempting to kill PID 3752 on AWSDMKNVAW0002 (admin_vpasupu1)
+[ERROR] Unable to kill process 3752 on AWSDMKNVAW0002: A parameter cannot be found that matches parameter name 'ComputerName'.
 
 [COMPLETED] Process scan and cleanup finished!
