@@ -68,25 +68,29 @@ foreach ($entry in $entries) {
                 Write-Host ("[WARN] Could not read owner for PID {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor DarkYellow
             }
 
-            # Step 1: Username match (case-insensitive)
-            if ($owner -ieq $osuser) {
-                # Step 2: Exact schematic match in command line (case-insensitive)
-                if ($cmd -match [regex]::Escape($schematic)) {
-                    Write-Host ("[MATCH] {0} running schematic '{1}' (PID: {2})" -f $owner, $schematic, $p.ProcessId) -ForegroundColor Green
-                    Write-Host ("[CMD] Command Line: {0}" -f $cmd) -ForegroundColor Cyan
+            Write-Host ("[DEBUG] PID: {0}, Owner: {1}, CMD: {2}" -f $p.ProcessId, ($owner -ne "" ? $owner : "Unknown"), ($cmd -ne $null ? $cmd : "NoCommandLine")) -ForegroundColor DarkGray
 
-                    # Kill the process remotely
-                    try {
-                        $result = $p.Terminate()
-                        if ($result.ReturnValue -eq 0) {
-                            Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
-                        } else {
-                            Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
-                        }
+            # Step 1: Username match (case-insensitive) — fallback to command line if GetOwner fails
+            $userMatch = ($owner -ieq $osuser) -or ($cmd -match $osuser)
+
+            # Step 2: Exact schematic match in command line (case-insensitive)
+            $schematicMatch = ($cmd -match [regex]::Escape($schematic))
+
+            if ($userMatch -and $schematicMatch) {
+                Write-Host ("[MATCH] {0} running schematic '{1}' (PID: {2})" -f $osuser, $schematic, $p.ProcessId) -ForegroundColor Green
+                Write-Host ("[CMD] Command Line: {0}" -f $cmd) -ForegroundColor Cyan
+
+                # Kill the process remotely
+                try {
+                    $result = $p.Terminate()
+                    if ($result.ReturnValue -eq 0) {
+                        Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
+                    } else {
+                        Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
                     }
-                    catch {
-                        Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
-                    }
+                }
+                catch {
+                    Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
                 }
             }
         }
