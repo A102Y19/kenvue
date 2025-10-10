@@ -1,30 +1,89 @@
-Input details: 
+##### MAIN SECTION #####
 
-OMP_JNJ_MD_ATOM_LAB_UTL        admin_vpasupu1                 JNJ\AWSDMKNVAW0002                      2                                                                                                 
+Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
+$data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
 
+if (-not $data -or $data.Count -eq 0) {
+    Write-Host "[ERROR] Input file empty or not found!" -ForegroundColor Red
+    exit
+}
 
-TaskMnager process details: 
+Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
 
-Name	PID	Status	User name	CPU	Memory (active private working set)	Command line	UAC virtualization
-ommenu_09_09_023_x64u.exe	24056	Running	Admin_VPasupu1	00 	38,308 K	"D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\menu\base\OMPartners.men" "/TITLE={OMP Plus - development}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\customerlogo.png" /NOSPLASH "/cudir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\omdata\development\user\admin_vpasupu1\OMMenu" 	Disabled
+# Parse input file into objects
+$entries = @()
+foreach ($line in $data) {
+    if ([string]::IsNullOrWhiteSpace($line)) { continue }
 
+    $parts      = $line -split '\s+'
+    $schemSrv   = $parts[0]
+    $osuser     = $parts[1]
+    $machineRaw = $parts[2]
+    $machine    = $machineRaw -replace '^.*\\',''   # strip domain if present
+    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
 
-Script Output:
+    $entries += [PSCustomObject]@{
+        SCHEMATIC = $schemSrv
+        OSUSER    = $osuser
+        MACHINE   = $machine
+        SESSION   = $sessionNum
+    }
+}
 
+# Current host details
+$hostMachine = $env:COMPUTERNAME
+$hostOSUser  = $env:USERNAME
 
-PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
-[DEBUG] Reading input file...
-[DEBUG] Total lines read from file: 1
-[DEBUG] Host Machine : AWSDMKNVAW0002
-[DEBUG] Host OSUSER  : SA-ITS-APSMDINT-LAB
+Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
+Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
 
-=============================
-[DEBUG] Processing MACHINE : AWSDMKNVAW0002
-[DEBUG] Target OSUSER      : admin_vpasupu1
-[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
-[DEBUG] Querying processes on AWSDMKNVAW0002 ...
-[WARN] Could not read owner for PID 8308 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+foreach ($entry in $entries) {
+    $schematic = $entry.SCHEMATIC
+    $osuser    = $entry.OSUSER
+    $machine   = $entry.MACHINE
 
-[COMPLETED] Process scan and cleanup finished!
+    Write-Host "`n=============================" -ForegroundColor DarkGray
+    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
+    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
+    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
 
-PS C:\Windows\system32> 
+    try {
+        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
+
+        # Get all processes remotely
+        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
+
+        if (-not $procs) {
+            Write-Host "[DEBUG] No processes returned from $machine" -ForegroundColor Red
+            continue
+        }
+
+        foreach ($p in $procs) {
+            $cmd = $p.CommandLine
+            # Step 1: Skip GetOwner, use username from servers.txt
+            # Step 2: Check if CommandLine contains schematic (partial match)
+            if ($cmd -like "*$($schematic.Split('_UTL')[0])*") {
+                # Optional: check PID running under correct user name? Skip for now
+                Write-Host ("[MATCH] Process '{0}' (PID: {1}) matches schematic '{2}'" -f $p.Name, $p.ProcessId, $schematic) -ForegroundColor Green
+
+                # Kill the process remotely
+                try {
+                    $result = $p.Terminate()
+                    if ($result.ReturnValue -eq 0) {
+                        Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
+                    } else {
+                        Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
+                    }
+                }
+                catch {
+                    Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
+                }
+            }
+        }
+    }
+    catch {
+        Write-Host ("[ERROR] Failed to query {0}: {1}" -f $machine, $_.Exception.Message) -ForegroundColor Red
+    }
+}
+
+Write-Host "`n[COMPLETED] Process scan and cleanup finished!" -ForegroundColor Cyan
