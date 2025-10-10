@@ -1,99 +1,72 @@
-##### MAIN SECTION #####
+PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
+[DEBUG] Reading input file...
+[DEBUG] Total lines read from file: 2
+[DEBUG] Host Machine : AWSDMKNVAW0002
+[DEBUG] Host OSUSER  : SA-ITS-APSMDINT-LAB
 
-Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
-$data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
+=============================
+[DEBUG] Processing MACHINE : AWSDMKNVAW000E
+[DEBUG] Target OSUSER      : admin_vpasupu1
+[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
+[DEBUG] Querying processes on AWSDMKNVAW000E ...
+[WARN] Could not read owner for PID 2248 on AWSDMKNVAW000E: Exception calling "GetOwner" : "Not found "
 
-if (-not $data -or $data.Count -eq 0) {
-    Write-Host "[ERROR] Input file empty or not found!" -ForegroundColor Red
-    exit
-}
+=============================
+[DEBUG] Processing MACHINE : AWSDMKNVAW0002
+[DEBUG] Target OSUSER      : admin_vpasupu1
+[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
+[DEBUG] Querying processes on AWSDMKNVAW0002 ...
+[MATCH] Admin_VPasupu1 running schematic 'OMP_JNJ_MD_ATOM_LAB_UTL' (PID: 29836)
+[CMD] Command Line: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\menu\base\
+OMPartners.men" "/TITLE={OMP Plus - development}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\customerlogo.png" /NOSPLASH "/cud
+ir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartne
+rs\omdata\development\user\admin_vpasupu1\OMMenu" 
+[KILLED] Process 29836 on AWSDMKNVAW0002
+[MATCH] Admin_VPasupu1 running schematic 'OMP_JNJ_MD_ATOM_LAB_UTL' (PID: 20676)
+[CMD] Command Line: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\spdevelopment\bin\menu\b
+ase\OMPartners.men" "/TITLE={OMP Plus - spdevelopment}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\spdevelopment\bin\customerlogo.png" /NOSP
+LASH "/cudir=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\spdevelopment\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATO
+MSP_DEV\OMPartners\omdata\spdevelopment\user\admin_vpasupu1\OMMenu" 
+[KILLED] Process 20676 on AWSDMKNVAW0002
+[MATCH] Admin_VPasupu1 running schematic 'OMP_JNJ_MD_ATOM_LAB_UTL' (PID: 21104)
+[CMD] Command Line: "\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\ompeditor_06_09_035_x64u\ompeditor_06_09_035_x64u.exe" "/database={OMP_JNJ_MD_ATOMSP_
+DEV_utl@DNV35003}" "/PAK={\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\Dispatcher_EDT_06_09A_008.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoi
+nt\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_1
+4\pak\ATOM_SP_UTL_DSP_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161925\pak\jnj_ortho_cust_UTL_D
+SP_last_DEV_20251003161925.pak}" "/VIEW" "/cuprof={OMP Dispatcher Viewer}" "/CUApplication=DSP" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMP
+artners\spdevelopment\dispatcher" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\omdata\spdevelopment\user\admin_vpasupu1\dispatcher\viewer"
+[KILLED] Process 21104 on AWSDMKNVAW0002
+[MATCH] Admin_VPasupu1 running schematic 'OMP_JNJ_MD_ATOM_LAB_UTL' (PID: 9692)
+[CMD] Command Line: "D:\OMClient\BIN\profilemanager_06_09_037_x64u\profilemanager_06_09_037_x64u.exe"   "/database={OMP_JNJ_MD_ATOMSP_DEV_utl@DNV35003}" "/PAK={\\awsusdmkfsxn01.jnj.c
+om\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\META_PFM_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\REF_UTL_PFM_06_09_028.pak,\\a
+wsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\META_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\STS_UTL_DM
+_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\META_SCI_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeA
+ndPakSource\REF_UTL_SCI_06_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\META_SAI2_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInst
+allpoint\R06_09\ExeAndPakSource\REF_UTL_SAI2_06_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\STS_UTL_SAI2_06_09_020.pak,\\awsusdmkfsxn01.jnj
+.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\MU_UTL_SetupManager_EDT_06_09_025.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\REF_UTL_SAP_
+EDT_06_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\OmpDataInspector_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\
+R06_09\ExeAndPakSource\Dispatcher_EDT_06_09A_008.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\REF_UTL_EDT_06_09_028.pak,\\awsusdmkfsxn01.jnj.com\md
+d_omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_UTL_EDT_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_03
+6\pak\LSS_UTL_MU_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_UTL_DIN_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_
+omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_UTL_SAPBS_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_03
+6\pak\LSS_UTL_SAPADV_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_EDT_04_07b_14.pak
+,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_MU_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_de
+v\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_DIN_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\
+JnJ_GlobalOrtho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_SAPBS_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\
+04_07b_14\pak\ATOM_SP_UTL_SAPADV_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161925\pak\jnj_ortho
+_cust_UTL_EDT_last_DEV_20251003161925.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161925\pak\jnj_ortho_cust
+_UTL_MU_last_DEV_20251003161925.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161925\pak\jnj_ortho_cust_UTL_D
+IN_last_DEV_20251003161925.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161925\pak\jnj_ortho_cust_UTL_SAPBS_
+last_DEV_20251003161925.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161925\pak\jnj_ortho_cust_UTL_SAPADV_la
+st_DEV_20251003161925.pak}"                                                                     "/ADMIN" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMS
+P_DEV\OMPartners\spdevelopment\profilemanager" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\omdata\spdevelopment\user\admin_vpasupu1\profilemanager"
 
-Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
+[KILLED] Process 9692 on AWSDMKNVAW0002
+[WARN] Could not read owner for PID 32592 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[WARN] Could not read owner for PID 24004 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[WARN] Could not read owner for PID 27088 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[WARN] Could not read owner for PID 32328 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
 
-# Parse input file into objects
-$entries = @()
-foreach ($line in $data) {
-    if ([string]::IsNullOrWhiteSpace($line)) { continue }
+[COMPLETED] Process scan and cleanup finished!
 
-    $parts      = $line -split '\s+'
-    $schemSrv   = $parts[0]
-    $osuser     = $parts[1]
-    $machineRaw = $parts[2]
-    $machine    = $machineRaw -replace '^.*\\',''   # strip domain if present
-    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
-
-    $entries += [PSCustomObject]@{
-        SCHEMATIC = $schemSrv
-        OSUSER    = $osuser
-        MACHINE   = $machine
-        SESSION   = $sessionNum
-    }
-}
-
-# Current host details
-$hostMachine = $env:COMPUTERNAME
-$hostOSUser  = $env:USERNAME
-
-Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
-Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
-
-foreach ($entry in $entries) {
-    $schematic = $entry.SCHEMATIC
-    $osuser    = $entry.OSUSER
-    $machine   = $entry.MACHINE
-
-    Write-Host "`n=============================" -ForegroundColor DarkGray
-    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
-    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
-    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
-
-    try {
-        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
-
-        # Get all processes remotely
-        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
-
-        if (-not $procs) {
-            Write-Host "[DEBUG] No processes returned from $machine" -ForegroundColor Red
-            continue
-        }
-
-        foreach ($p in $procs) {
-            $cmd = $p.CommandLine
-            $owner = ""
-            try {
-                $ownerObj = $p.GetOwner()
-                $owner = $ownerObj.User
-            } catch {
-                Write-Host ("[WARN] Could not read owner for PID {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor DarkYellow
-            }
-
-            # Step 1: Username match (case-insensitive)
-            if ($owner -ieq $osuser) {
-                # Step 2: Partial schematic match in command line
-                if ($cmd -like "*$($schematic.Split('_UTL')[0])*") {
-                    Write-Host ("[MATCH] {0} running schematic '{1}' (PID: {2})" -f $owner, $schematic, $p.ProcessId) -ForegroundColor Green
-                    Write-Host ("[CMD] Command Line: {0}" -f $cmd) -ForegroundColor Cyan
-
-                    # Kill the process remotely
-                    try {
-                        $result = $p.Terminate()
-                        if ($result.ReturnValue -eq 0) {
-                            Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
-                        } else {
-                            Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
-                        }
-                    }
-                    catch {
-                        Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
-                    }
-                }
-            }
-        }
-    }
-    catch {
-        Write-Host ("[ERROR] Failed to query {0}: {1}" -f $machine, $_.Exception.Message) -ForegroundColor Red
-    }
-}
-
-Write-Host "`n[COMPLETED] Process scan and cleanup finished!" -ForegroundColor Cyan
+PS C:\Windows\system32> 
