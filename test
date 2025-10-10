@@ -1,59 +1,7 @@
-Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
-$data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
-
-Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
-
-$entries = @()
-foreach ($line in $data) {
-    if ([string]::IsNullOrWhiteSpace($line)) { continue }
-
-    $parts      = $line -split '\s+'
-    $schemSrv   = $parts[0]
-    $osuser     = $parts[1]
-    $machineRaw = $parts[2]
-    $machine    = $machineRaw -replace '^.*\\',''
-    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
-
-    $entries += [PSCustomObject]@{
-        SCHEMATIC = $schemSrv
-        OSUSER    = $osuser
-        MACHINE   = $machine
-        SESSION   = $sessionNum
-    }
-}
-
-foreach ($entry in $entries) {
-    $schematic = $entry.SCHEMATIC
-    $osuser    = $entry.OSUSER
-    $machine   = $entry.MACHINE
-
-    Write-Host "`n=============================" -ForegroundColor DarkGray
-    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
-    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
-    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
-
-    try {
-        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
-        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
-
-        foreach ($p in $procs) {
-            $owner = $p.GetOwner().User
-            $cmd   = $p.CommandLine
-
-            if (($owner -ieq $osuser) -and ($cmd -match $schematic)) {
-                Write-Host "[MATCH] $owner running schematic '$schematic' (PID: $($p.ProcessId))" -ForegroundColor Green
-                try {
-                    Stop-Process -Id $p.ProcessId -ComputerName $machine -Force
-                    Write-Host "[KILLED] Process $($p.ProcessId) on $machine" -ForegroundColor Red
-                }
-                catch {
-                    Write-Host "[ERROR] Unable to kill process $($p.ProcessId) on $machine: $($_.Exception.Message)" -ForegroundColor Red
-                }
-            }
-        }
-    }
-    catch {
-        Write-Host "[ERROR] Failed to query $machine : $($_.Exception.Message)" -ForegroundColor Red
-    }
-}
-
+PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
+At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:50 char:83
++ ...  "[ERROR] Unable to kill process $($p.ProcessId) on $machine: $($_.Ex ...
++                                                         ~~~~~~~~~
+Variable reference is not valid. ':' was not followed by a valid variable name character. Consider using ${} to delimit the name.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidVariableReferenceWithDrive
