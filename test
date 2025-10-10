@@ -1,112 +1,35 @@
-##### MAIN SECTION #####
+PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
+[DEBUG] Reading input file...
+[DEBUG] Total lines read from file: 2
+[DEBUG] Host Machine : AWSDMKNVAW0002
+[DEBUG] Host OSUSER  : SA-ITS-APSMDINT-LAB
 
-# Dry-run mode (true = only simulate, false = actually kill)
-$DryRun = $true
+=============================
+[DEBUG] Processing MACHINE : AWSDMKNVAW000E
+[DEBUG] Target OSUSER      : admin_vpasupu1
+[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
+[DEBUG] Querying processes on AWSDMKNVAW000E ...
+[MATCH] Admin_VPasupu1 running schematic 'OMP_JNJ_MD_ATOM_LAB_UTL' (PID: 17856)
+[CMD] Command Line: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\menu\base\
+OMPartners.men" "/TITLE={OMP Plus - development}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\customerlogo.png" /NOSPLASH "/cud
+ir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartne
+rs\omdata\development\user\admin_vpasupu1\OMMenu" 
+[DRY-RUN] Would have killed process 17856 on AWSDMKNVAW000E
 
-Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
-$data = Get-Content "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\log\servers.txt"
+=============================
+[DEBUG] Processing MACHINE : AWSDMKNVAW0002
+[DEBUG] Target OSUSER      : admin_vpasupu1
+[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
+[DEBUG] Querying processes on AWSDMKNVAW0002 ...
+[MATCH] Admin_VPasupu1 running schematic 'OMP_JNJ_MD_ATOM_LAB_UTL' (PID: 18464)
+[CMD] Command Line: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\menu\base\
+OMPartners.men" "/TITLE={OMP Plus - development}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\customerlogo.png" /NOSPLASH "/cud
+ir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartne
+rs\omdata\development\user\admin_vpasupu1\OMMenu" 
+[DRY-RUN] Would have killed process 18464 on AWSDMKNVAW0002
+[WARN] Could not read owner for PID 24472 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[WARN] Could not read owner for PID 25884 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[WARN] Could not read owner for PID 7684 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
+[WARN] Could not read owner for PID 30552 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
 
-if (-not $data -or $data.Count -eq 0) {
-    Write-Host "[ERROR] Input file empty or not found!" -ForegroundColor Red
-    exit
-}
-
-Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
-
-# Parse input file into objects
-$entries = @()
-foreach ($line in $data) {
-    if ([string]::IsNullOrWhiteSpace($line)) { continue }
-
-    $parts      = $line -split '\s+'
-    $schemSrv   = $parts[0]                     # Schematic from input
-    $osuser     = $parts[1]                     # Target OS User
-    $machineRaw = $parts[2]
-    $machine    = $machineRaw -replace '^.*\\',''   # Strip domain if present
-    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
-
-    $entries += [PSCustomObject]@{
-        SCHEMATIC = $schemSrv
-        OSUSER    = $osuser
-        MACHINE   = $machine
-        SESSION   = $sessionNum
-    }
-}
-
-# Current host details
-$hostMachine = $env:COMPUTERNAME
-$hostOSUser  = $env:USERNAME
-
-Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
-Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
-
-foreach ($entry in $entries) {
-    $schematicInput = $entry.SCHEMATIC
-    $osuser         = $entry.OSUSER
-    $machine        = $entry.MACHINE
-
-    # Prepare base schematic for matching (remove _UTL suffix if exists)
-    $schematicBase = $schematicInput -replace '_UTL$',''
-
-    Write-Host "`n=============================" -ForegroundColor DarkGray
-    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
-    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
-    Write-Host "[DEBUG] Target SCHEMATIC   : $schematicInput" -ForegroundColor Cyan
-
-    try {
-        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
-
-        # Get all processes remotely
-        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
-
-        if (-not $procs) {
-            Write-Host "[DEBUG] No processes returned from $machine" -ForegroundColor Red
-            continue
-        }
-
-        foreach ($p in $procs) {
-            $cmd = $p.CommandLine
-            $owner = ""
-            try {
-                $ownerObj = $p.GetOwner()
-                $owner = $ownerObj.User
-            } catch {
-                Write-Host ("[WARN] Could not read owner for PID {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor DarkYellow
-                continue
-            }
-
-            # Step 1: Username match (case-insensitive)
-            if ($owner -ieq $osuser) {
-
-                # Step 2: Exact schematic match in command line
-                if ($cmd -match [regex]::Escape($schematicBase)) {
-
-                    Write-Host ("[MATCH] {0} running schematic '{1}' (PID: {2})" -f $owner, $schematicInput, $p.ProcessId) -ForegroundColor Green
-                    Write-Host ("[CMD] Command Line: {0}" -f $cmd) -ForegroundColor Cyan
-
-                    # Kill the process remotely or simulate if dry-run
-                    if (-not $DryRun) {
-                        try {
-                            $result = $p.Terminate()
-                            if ($result.ReturnValue -eq 0) {
-                                Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
-                            } else {
-                                Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
-                            }
-                        }
-                        catch {
-                            Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
-                        }
-                    } else {
-                        Write-Host ("[DRY-RUN] Would have killed process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Yellow
-                    }
-                }
-            }
-        }
-    }
-    catch {
-        Write-Host ("[ERROR] Failed to query {0}: {1}" -f $machine, $_.Exception.Message) -ForegroundColor Red
-    }
-}
-
-Write-Host "`n[COMPLETED] Process scan and cleanup finished!" -ForegroundColor Cyan
+[COMPLETED] Process scan and cleanup finished!
