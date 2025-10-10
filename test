@@ -1,46 +1,107 @@
-PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:72 char:98
-+ ...  {0}, Owner: {1}, CMD: {2}" -f $p.ProcessId, ($owner -ne "" ? $owner  ...
-+                                                                 ~
-Unexpected token '?' in expression or statement.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:72 char:97
-+ ... D: {0}, Owner: {1}, CMD: {2}" -f $p.ProcessId, ($owner -ne "" ? $owne ...
-+                                                                  ~
-Missing closing ')' in expression.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:62 char:32
-+         foreach ($p in $procs) {
-+                                ~
-Missing closing '}' in statement block or type definition.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:51 char:9
-+     try {
-+         ~
-Missing closing '}' in statement block or type definition.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:72 char:118
-+ ... MD: {2}" -f $p.ProcessId, ($owner -ne "" ? $owner : "Unknown"), ($cmd ...
-+                                                                  ~
-The Try statement is missing its Catch or Finally block.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:41 char:30
-+ foreach ($entry in $entries) {
-+                              ~
-Missing closing '}' in statement block or type definition.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:72 char:118
-+ ... D: {2}" -f $p.ProcessId, ($owner -ne "" ? $owner : "Unknown"), ($cmd  ...
-+                                                                 ~
-Unexpected token ')' in expression or statement.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:72 char:137
-+ ... ssId, ($owner -ne "" ? $owner : "Unknown"), ($cmd -ne $null ? $cmd :  ...
-+                                                                 ~
-Unexpected token '?' in expression or statement.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:72 char:136
-+ ... cessId, ($owner -ne "" ? $owner : "Unknown"), ($cmd -ne $null ? $cmd  ...
-+                                                                  ~
-Missing closing ')' in expression.
-At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:72 char:161
-+ ... owner : "Unknown"), ($cmd -ne $null ? $cmd : "NoCommandLine")) -Foreg ...
-+                                                                 ~
-Unexpected token ')' in expression or statement.
-Not all parse errors were reported.  Correct the reported errors and try again.
-    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
-    + FullyQualifiedErrorId : UnexpectedToken
- 
+##### MAIN SECTION #####
 
+Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
+$data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
+
+if (-not $data -or $data.Count -eq 0) {
+    Write-Host "[ERROR] Input file empty or not found!" -ForegroundColor Red
+    exit
+}
+
+Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
+
+# Parse input file into objects
+$entries = @()
+foreach ($line in $data) {
+    if ([string]::IsNullOrWhiteSpace($line)) { continue }
+
+    $parts      = $line -split '\s+'
+    $schemSrv   = $parts[0]
+    $osuser     = $parts[1]
+    $machineRaw = $parts[2]
+    $machine    = $machineRaw -replace '^.*\\',''   # strip domain if present
+    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
+
+    $entries += [PSCustomObject]@{
+        SCHEMATIC = $schemSrv
+        OSUSER    = $osuser
+        MACHINE   = $machine
+        SESSION   = $sessionNum
+    }
+}
+
+# Current host details
+$hostMachine = $env:COMPUTERNAME
+$hostOSUser  = $env:USERNAME
+
+Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
+Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
+
+foreach ($entry in $entries) {
+    $schematic = $entry.SCHEMATIC
+    $osuser    = $entry.OSUSER
+    $machine   = $entry.MACHINE
+
+    Write-Host "`n=============================" -ForegroundColor DarkGray
+    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
+    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
+    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
+
+    try {
+        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
+
+        # Get all processes remotely
+        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
+
+        if (-not $procs) {
+            Write-Host "[DEBUG] No processes returned from $machine" -ForegroundColor Red
+            continue
+        }
+
+        foreach ($p in $procs) {
+            $cmd = $p.CommandLine
+            $owner = ""
+            try {
+                $ownerObj = $p.GetOwner()
+                $owner = $ownerObj.User
+            } catch {
+                Write-Host ("[WARN] Could not read owner for PID {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor DarkYellow
+            }
+
+            # Safe owner string
+            if ($owner -eq "" -or $owner -eq $null) { $ownerSafe = "Unknown" } else { $ownerSafe = $owner }
+            if ($cmd -eq $null) { $cmdSafe = "NoCommandLine" } else { $cmdSafe = $cmd }
+
+            Write-Host ("[DEBUG] PID: {0}, Owner: {1}, CMD: {2}" -f $p.ProcessId, $ownerSafe, $cmdSafe) -ForegroundColor DarkGray
+
+            # Step 1: Username match (case-insensitive) — fallback to command line if GetOwner fails
+            $userMatch = ($ownerSafe -ieq $osuser) -or ($cmdSafe -match $osuser)
+
+            # Step 2: Exact schematic match in command line (case-insensitive)
+            $schematicMatch = ($cmdSafe -match [regex]::Escape($schematic))
+
+            if ($userMatch -and $schematicMatch) {
+                Write-Host ("[MATCH] {0} running schematic '{1}' (PID: {2})" -f $osuser, $schematic, $p.ProcessId) -ForegroundColor Green
+                Write-Host ("[CMD] Command Line: {0}" -f $cmdSafe) -ForegroundColor Cyan
+
+                # Kill the process remotely
+                try {
+                    $result = $p.Terminate()
+                    if ($result.ReturnValue -eq 0) {
+                        Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
+                    } else {
+                        Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
+                    }
+                }
+                catch {
+                    Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
+                }
+            }
+        }
+    }
+    catch {
+        Write-Host ("[ERROR] Failed to query {0}: {1}" -f $machine, $_.Exception.Message) -ForegroundColor Red
+    }
+}
+
+Write-Host "`n[COMPLETED] Process scan and cleanup finished!" -ForegroundColor Cyan
