@@ -1,95 +1,21 @@
-##### MAIN SECTION #####
+PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
+[DEBUG] Reading input file...
+Get-Content : Access is denied
+At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:4 char:9
++ $data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automatio ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (\\awsusdmlfsxn0...log\servers.txt:String) [Get-Content], UnauthorizedAccessException
+    + FullyQualifiedErrorId : ItemExistsUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetContentCommand
+ 
+Get-Content : Cannot find path '\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt' because it does not exist.
+At \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1:4 char:9
++ $data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automatio ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (\\awsusdmlfsxn0...log\servers.txt:String) [Get-Content], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+ 
+[DEBUG] Total lines read from file: 0
+[DEBUG] Host Machine : AWSDMKNVAW0002
+[DEBUG] Host OSUSER  : SA-ITS-APSMDINT-LAB
 
-Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
-$data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
-
-Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
-
-# Parse input file into objects
-$entries = @()
-foreach ($line in $data) {
-    if ([string]::IsNullOrWhiteSpace($line)) { continue }
-
-    $parts      = $line -split '\s+'
-    $schemSrv   = $parts[0]
-    $osuser     = $parts[1]
-    $machineRaw = $parts[2]
-    $machine    = $machineRaw -replace '^.*\\',''   # strip JNJ\ if present
-    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
-
-    $entries += [PSCustomObject]@{
-        SCHEMATIC = $schemSrv
-        OSUSER    = $osuser
-        MACHINE   = $machine
-        SESSION   = $sessionNum
-    }
-}
-
-# Current host details
-$hostMachine = $env:COMPUTERNAME
-$hostOSUser  = $env:USERNAME
-
-Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
-Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
-
-foreach ($entry in $entries) {
-    $schematic = $entry.SCHEMATIC
-    $osuser    = $entry.OSUSER
-    $machine   = $entry.MACHINE
-
-    Write-Host "`n=============================" -ForegroundColor DarkGray
-    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
-    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
-    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
-
-    try {
-        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
-
-        # Get process list remotely
-        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
-
-        if (-not $procs) {
-            Write-Host "[DEBUG] No processes returned from $machine" -ForegroundColor Red
-            continue
-        }
-
-        $matchedProcs = @()
-        foreach ($p in $procs) {
-            try {
-                $ownerObj = $p.GetOwner()
-                $owner = $ownerObj.User
-                $cmd   = $p.CommandLine
-
-                # Match username and schematic in command line (case-insensitive)
-                if (($owner -ieq $osuser) -and ($cmd -match [regex]::Escape($schematic))) {
-                    $matchedProcs += $p
-                    Write-Host ("[MATCH] $owner running schematic '{0}' (PID: {1})" -f $schematic, $p.ProcessId) -ForegroundColor Green
-                }
-            }
-            catch {
-                Write-Host ("[WARN] Failed to read owner for PID {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor DarkYellow
-            }
-        }
-
-        if ($matchedProcs.Count -eq 0) {
-            Write-Host "[INFO] No matching processes found for $osuser / $schematic on $machine" -ForegroundColor Yellow
-            continue
-        }
-
-        foreach ($proc in $matchedProcs) {
-            try {
-                Write-Host ("[DEBUG] Attempting to kill PID {0} on {1} ({2})" -f $proc.ProcessId, $machine, $osuser) -ForegroundColor Yellow
-                Stop-Process -Id $proc.ProcessId -ComputerName $machine -Force
-                Write-Host ("[KILLED] Process {0} on {1}" -f $proc.ProcessId, $machine) -ForegroundColor Red
-            }
-            catch {
-                Write-Host ("[ERROR] Unable to kill process {0} on {1}: {2}" -f $proc.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
-            }
-        }
-    }
-    catch {
-        Write-Host ("[ERROR] Failed to query {0}: {1}" -f $machine, $_.Exception.Message) -ForegroundColor Red
-    }
-}
-
-Write-Host "`n[COMPLETED] Process scan and cleanup finished!" -ForegroundColor Cyan
+[COMPLETED] Process scan and cleanup finished!
