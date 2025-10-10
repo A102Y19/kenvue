@@ -72,7 +72,8 @@ foreach ($entry in $entries) {
             if ($owner -ieq $osuser) {
                 # Step 2: Partial schematic match in command line
                 if ($cmd -like "*$($schematic.Split('_UTL')[0])*") {
-                    Write-Host ("[MATCH] $owner running schematic '{0}' (PID: {1})" -f $schematic, $p.ProcessId) -ForegroundColor Green
+                    Write-Host ("[MATCH] {0} running schematic '{1}' (PID: {2})" -f $owner, $schematic, $p.ProcessId) -ForegroundColor Green
+                    Write-Host ("[CMD] Command Line: {0}" -f $cmd) -ForegroundColor Cyan
 
                     # Kill the process remotely
                     try {
