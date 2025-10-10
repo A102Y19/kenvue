@@ -1,107 +1,771 @@
-##### MAIN SECTION #####
+PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
+[DEBUG] Reading input file...
+[DEBUG] Total lines read from file: 2
+[DEBUG] Host Machine : AWSDMKNVAW0002
+[DEBUG] Host OSUSER  : SA-ITS-APSMDINT-LAB
 
-Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
-$data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
+=============================
+[DEBUG] Processing MACHINE : AWSDMKNVAW000E
+[DEBUG] Target OSUSER      : admin_vpasupu1
+[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
+[DEBUG] Querying processes on AWSDMKNVAW000E ...
+[DEBUG] PID: 0, Owner: Unknown, CMD: NoCommandLine
+[DEBUG] PID: 4, Owner: Unknown, CMD: NoCommandLine
+[DEBUG] PID: 120, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 680, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 796, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 872, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 880, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 944, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 1016, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 356, Owner: SYSTEM, CMD: C:\Windows\system32\lsass.exe
+[DEBUG] PID: 1048, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k DcomLaunch -p -s PlugPlay
+[DEBUG] PID: 1076, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k DcomLaunch -p
+[DEBUG] PID: 1100, Owner: UMFD-0, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 1108, Owner: UMFD-1, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 1192, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\svchost.exe -k RPCSS -p
+[DEBUG] PID: 1232, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k DcomLaunch -p -s LSM
+[DEBUG] PID: 1336, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\svchost.exe -k termsvcs -s TermService
+[DEBUG] PID: 1368, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -s W32Time
+[DEBUG] PID: 1376, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p -s lmhosts
+[DEBUG] PID: 1384, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s nsi
+[DEBUG] PID: 1516, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s NcbService
+[DEBUG] PID: 1524, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s TimeBrokerSvc
+[DEBUG] PID: 1532, Owner: SYSTEM, CMD: "LogonUI.exe" /flags:0x2 /state0:0xa3b75055 /state1:0x41c64e6d
+[DEBUG] PID: 1552, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s Dhcp
+[DEBUG] PID: 1636, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\svchost.exe -k NetworkService -p -s Dnscache
+[DEBUG] PID: 1720, Owner: DWM-1, CMD: "dwm.exe"
+[DEBUG] PID: 1848, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p -s EventLog
+[DEBUG] PID: 1876, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNoNetworkFirewall -p
+[DEBUG] PID: 1980, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s ProfSvc
+[DEBUG] PID: 1976, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k GPSvcGroup
+[DEBUG] PID: 1992, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s Themes
+[DEBUG] PID: 2000, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s EventSystem
+[DEBUG] PID: 1412, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\svchost.exe -k NetworkService -p -s NlaSvc
+[DEBUG] PID: 2076, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s SENS
+[DEBUG] PID: 2128, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k winmgmt -s Winmgmt
+[DEBUG] PID: 2136, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s Schedule
+[DEBUG] PID: 2188, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalService -p -s netprofm
+[DEBUG] PID: 2272, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s WinHttpAutoProxySvc
+[DEBUG] PID: 2328, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+[DEBUG] PID: 2348, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\svchost.exe -k NetworkServiceNetworkRestricted -p -s PolicyAgent
+[DEBUG] PID: 2360, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s IKEEXT
+[DEBUG] PID: 2444, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s ShellHWDetection
+[DEBUG] PID: 2472, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s AudioEndpointBuilder
+[DEBUG] PID: 2480, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s FontCache
+[DEBUG] PID: 2584, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k NetSvcs -p -s iphlpsvc
+[DEBUG] PID: 2836, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+[DEBUG] PID: 2940, Owner: SYSTEM, CMD: "C:\Windows\system32\rundll32.exe" C:\Windows\system32\pla.dll,PlaHost "Server Manager Performance Monitor" "$(Arg0)"
+[DEBUG] PID: 2968, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s UserManager
+[DEBUG] PID: 3012, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\svchost.exe -k NetworkService -p -s LanmanWorkstation
+[DEBUG] PID: 3172, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s UmRdpService
+[DEBUG] PID: 3352, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -s CertPropSvc
+[DEBUG] PID: 3380, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s SessionEnv
+[DEBUG] PID: 3600, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNoNetwork -p
+[DEBUG] PID: 3800, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\AMSP\coreServiceShell.exe" coreFrameworkHost.exe -m=nb -dt=180000 -ad -bt=0
+[DEBUG] PID: 3916, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\svchost.exe -k NetworkService -p -s CryptSvc
+[DEBUG] PID: 3932, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k utcsvc -p
+[DEBUG] PID: 3944, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 3956, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s Netman
+[DEBUG] PID: 3964, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k LocalSystemNetworkRestricted -p -s SysMain
+[DEBUG] PID: 3976, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s sacsvr
+[DEBUG] PID: 4004, Owner: SYSTEM, CMD: "c:\Program Files\Avecto\Privilege Guard Client\DefendpointBeyondInsightAdapter.exe"
+[DEBUG] PID: 4020, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\ds_monitor.exe"
+[DEBUG] PID: 4028, Owner: SYSTEM, CMD: "C:\Program Files\Avecto\Avecto IC3 Adapter\Avecto.IC3.Client.Host.exe"
+[DEBUG] PID: 4036, Owner: SYSTEM, CMD: "c:\Program Files\Avecto\Privilege Guard Client\DefendpointService.exe"
+[DEBUG] PID: 4044, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\svchost.exe -k NetworkService -p -s WinRM
+[DEBUG] PID: 4052, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\ir_agent.exe"
+[DEBUG] PID: 4060, Owner: SYSTEM, CMD: C:\Windows\CCM\RemCtrl\CmRcService.exe
+[DEBUG] PID: 4076, Owner: SYSTEM, CMD: "C:\Program Files\Amazon\SSM\amazon-ssm-agent.exe"
+[DEBUG] PID: 4084, Owner: SYSTEM, CMD: "C:\Program Files\Cisco\AMP\7.5.17.21680\sfc.exe"
+[DEBUG] PID: 3196, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s TrkWks
+[DEBUG] PID: 3372, Owner: SYSTEM, CMD: "c:\Program Files (x86)\ManageSoft\Schedule Agent\ndinit.exe"
+[DEBUG] PID: 3492, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 3508, Owner: SYSTEM, CMD: "c:\Program Files\Microsoft Monitoring Agent\Agent\HealthService.exe"
+[DEBUG] PID: 4104, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\TaniumClient.exe" --service
+[DEBUG] PID: 4112, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Trend Micro\\Endpoint Basecamp\\EndpointBasecamp.exe" /service
+[DEBUG] PID: 4120, Owner: SYSTEM, CMD: "C:\Program Files\rise\bin\risebot.exe"
+[DEBUG] PID: 4160, Owner: SYSTEM, CMD: "c:\Program Files (x86)\ManageSoft\Security Agent\mgssecsvc.exe"
+[DEBUG] PID: 4172, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k smbsvcs -s LanmanServer
+[DEBUG] PID: 4756, Owner: SYSTEM, CMD: coreFrameworkHost.exe 3800 1
+[DEBUG] PID: 4792, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 5016, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 5304, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 5560, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 5708, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\components\insight_agent\4.0.13.32/ir_agent.exe"
+[DEBUG] PID: 5988, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /svchost_vom
+[DEBUG] PID: 5996, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 7124, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\dsa.exe" -a "ds_agent" -b -i -w "HKLM\Software\TrendMicro\Deep Security Agent\DataFolder" -e 
+"c:\Program Files\Trend Micro\Deep Security Agent\ext"
+[DEBUG] PID: 7116, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\Notifier.exe" -service
+[DEBUG] PID: 7260, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /xbc_auth_sdk FLKeHuAqKgPhr4GiuQYK
+[DEBUG] PID: 7268, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /xbc_auth_sdk goXOOFsZAPHxgKdFxVbR
+[DEBUG] PID: 7304, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 7340, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 7532, Owner: SYSTEM, CMD: ndtask.exe
+[DEBUG] PID: 7492, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k appmodel -p -s StateRepository
+[DEBUG] PID: 8424, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /xbc_auth_sdk D2PsC1RutTfSvG1n92Gc
+[DEBUG] PID: 8492, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 8928, Owner: SYSTEM, CMD: "C:\Program Files\Microsoft Monitoring Agent\Agent\MonitoringHost.exe" -Embedding
+[DEBUG] PID: 9380, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\unsecapp.exe -Embedding
+[DEBUG] PID: 9400, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\dsa-connect.exe"  main
+[DEBUG] PID: 9500, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 9628, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\dsa-connect.exe" hub
+[DEBUG] PID: 10072, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\netagent\tm_netagent.exe" --metrics-file "c:\ProgramData\Trend Micro\Deep Security Agent\net
+agent\metrics.json" --log-folder "c:\ProgramData\Trend Micro\Deep Security Agent\netagent\logs" --ptn-folder "c:\Program Files\Trend Micro\Deep Security Agent\netagent\pattern" --jat
+-folder "c:\Program Files\Trend Micro\Deep Security Agent\netagent" --jex-folder "c:\ProgramData\Trend Micro\Deep Security Agent\netagentjava"  --log-console=false --log-level 1 --tm
+Cfg WyJMU0FQIiwiU3NsSW5ib3VuZCIsIlNzbE91dGJvdW5kIl0=
+[DEBUG] PID: 10112, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNoNetwork -p -s pla
+[DEBUG] PID: 10148, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 10040, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\netagent\tm_netagent.exe" --metrics-file "c:\ProgramData\Trend Micro\Deep Security Agent\net
+agent\metrics.json" --log-folder "c:\ProgramData\Trend Micro\Deep Security Agent\netagent\logs" --ptn-folder "c:\Program Files\Trend Micro\Deep Security Agent\netagent\pattern" --jat
+-folder "c:\Program Files\Trend Micro\Deep Security Agent\netagent" --jex-folder "c:\ProgramData\Trend Micro\Deep Security Agent\netagentjava" --log-console=false --log-level 1 --tmC
+fg WyJMU0FQIiwiU3NsSW5ib3VuZCIsIlNzbE91dGJvdW5kIl0=
+[DEBUG] PID: 10168, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-service true
+[DEBUG] PID: 5240, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 8896, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 8808, Owner: SYSTEM, CMD: C:\Windows\CCM\CcmExec.exe
+[DEBUG] PID: 5328, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 1824, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 2644, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 5088, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\components\insight_agent\4.0.13.32\ir_agent.exe" "--multiprocessing-fork" "parent_pid=5708" "pipe_handle
+=1884"
+[DEBUG] PID: 1736, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s CDPSvc
+[DEBUG] PID: 2732, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNoNetwork -p -s DPS
+[DEBUG] PID: 3864, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\msdtc.exe
+[DEBUG] PID: 10008, Owner: SYSTEM, CMD: "c:\Program Files (x86)\Microsoft PFE Remediation for Configuration Manager\PFERemediation.exe"
+[DEBUG] PID: 8336, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k LocalSystemNetworkRestricted -p -s UALSVC
+[DEBUG] PID: 10160, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s UsoSvc
+[DEBUG] PID: 9256, Owner: SA-ITS-APSMDDINT-QA, CMD: cmd.exe /c "("D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe" "/database={OMP_JNJ_MD_ATOMSP_REG_utl@QNV7700
+5}" "/AGENT" "/cuprof={OMP Dispatcher Agent}" "/CUApplication=DSP" "/PAK={D:\OMClient\bin\Dispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_023.pak,D:\OMClient\bin\ATO
+M_SP_UTL_DSP_04_01_24.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMP_JNJ_MD_ATOMSP_REG\OMPartners\spreg\dispatcher" "/LOGDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa_om
+p\OMP_JNJ_MD_ATOMSP_REG\OMPartners\omdata\spreg\dispatcher\Agent"  "/Invisible" %DSPRunArguments% "/debug_dsp_wmic") & ("\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMP_JNJ_MD_ATOMSP_REG\OMP
+artners\spreg\dispatcher\bin\DispatcherManagementAction.cmd" RestartUponFailure /agent)"
+[DEBUG] PID: 1604, Owner: SA-ITS-APSMDDINT-QA, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 10104, Owner: SA-ITS-APSMDDINT-QA, CMD: "D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe"  "/database={OMP_JNJ_MD_ATOMSP_REG_utl@QNV77005}" "/AGENT
+" "/cuprof={OMP Dispatcher Agent}" "/CUApplication=DSP" "/PAK={D:\OMClient\bin\Dispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_023.pak,D:\OMClient\bin\ATOM_SP_UTL_DS
+P_04_01_24.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMP_JNJ_MD_ATOMSP_REG\OMPartners\spreg\dispatcher" "/LOGDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMP_JNJ_M
+D_ATOMSP_REG\OMPartners\omdata\spreg\dispatcher\Agent"  "/Invisible" %DSPRunArguments% "/debug_dsp_wmic"
+[DEBUG] PID: 11052, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 2700, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s TokenBroker
+[DEBUG] PID: 2460, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 9388, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s DsSvc
+[DEBUG] PID: 9856, Owner: SYSTEM, CMD: C:\Windows\system32\dllhost.exe /Processid:{02D4B3F1-FD88-11D1-960D-00805FC79235}
+[DEBUG] PID: 8024, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s TabletInputService
+[DEBUG] PID: 12056, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+[DEBUG] PID: 2320, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalService -p -s LicenseManager
+[DEBUG] PID: 6652, Owner: SYSTEM, CMD: C:\Windows\sysWOW64\wbem\wmiprvse.exe -Embedding
+[DEBUG] PID: 10624, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s Appinfo
+[DEBUG] PID: 4920, Owner: SYSTEM, CMD: c:\telegraf\bin\telegraf.exe  --config c:\telegraf\telegraf.conf --config-directory c:\telegraf\telegraf.d
+[DEBUG] PID: 16728, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\components\endpoint_broker\1.9.0.3/rapid7_endpoint_broker.exe"
+[DEBUG] PID: 13960, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\components\agent_core\1.3.0.2/rapid7_agent_core.exe"
+[DEBUG] PID: 16948, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k swprv
+[DEBUG] PID: 4856, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s AppMgmt
+[DEBUG] PID: 18208, Owner: SA-ITS-APSMDDINT-QA, CMD: cmd.exe /c "("D:\OMClient\BIN\ompeditor_06_09_035_x64u\ompeditor_06_09_035_x64u.exe" "/database={OMP_JNJ_MD_ATOMSP_QA_utl@QNV7700
+5}" "/AGENT" "/cuprof={OMP Dispatcher Agent}" "/CUApplication=DSP" "/PAK={D:\OMClient\bin\Dispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jn
+j.com\mdd_qa_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_12\pak\ATOM_SP_UTL_DSP_04_07b_12.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMPInstallpoint\R06
+_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_ortho_cust_UTL_DSP_last_DEV_20250725130525.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa_omp
+\OMP_JNJ_MD_ATOMSP_QA\OMPartners\spquality\dispatcher" "/LOGDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMP_JNJ_MD_ATOMSP_QA\OMPartners\omdata\spquality\dispatcher\Agent"  "/Invisible" %
+DSPRunArguments% "/debug_dsp_wmic") & ("\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMP_JNJ_MD_ATOMSP_QA\OMPartners\spquality\dispatcher\bin\DispatcherManagementAction.cmd" RestartUponFailur
+e /agent)"
+[DEBUG] PID: 22676, Owner: SA-ITS-APSMDDINT-QA, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 6868, Owner: SA-ITS-APSMDDINT-QA, CMD: "D:\OMClient\BIN\ompeditor_06_09_035_x64u\ompeditor_06_09_035_x64u.exe"  "/database={OMP_JNJ_MD_ATOMSP_QA_utl@QNV77005}" "/AGENT" 
+"/cuprof={OMP Dispatcher Agent}" "/CUApplication=DSP" "/PAK={D:\OMClient\bin\Dispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa_
+omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_12\pak\ATOM_SP_UTL_DSP_04_07b_12.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMPInstallpoint\R06_09\Solutions
+\JnJ_GlobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_ortho_cust_UTL_DSP_last_DEV_20250725130525.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMP_JNJ_MD_A
+TOMSP_QA\OMPartners\spquality\dispatcher" "/LOGDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa_omp\OMP_JNJ_MD_ATOMSP_QA\OMPartners\omdata\spquality\dispatcher\Agent"  "/Invisible" %DSPRunArgumen
+ts% "/debug_dsp_wmic"
+[DEBUG] PID: 12576, Owner: SA-ITS-APSMDDINT-QA8, CMD: cmd.exe /c "("D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe" "/database={OMP_JNJ_MD_ATOMSP_QA8_utl@QNV77
+005}" "/AGENT" "/cuprof={OMP Dispatcher Agent}" "/CUApplication=DSP" "/PAK={D:\OMClient\bin\Dispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.
+jnj.com\mdd_qa5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\R04_07b\04_07b_12\pak\ATOM_SP_UTL_DSP_04_07b_12.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_om
+p\OMP_JNJ_MD_ATOMSP_QA8\OMPartners\spqa8\dispatcher" "/LOGDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA8\OMPartners\omdata\spqa8\dispatcher\Agent"  "/Invisible" %DSPR
+unArguments% "/debug_dsp_wmic") & ("\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA8\OMPartners\spqa8\dispatcher\bin\DispatcherManagementAction.cmd" RestartUponFailure /age
+nt)"
+[DEBUG] PID: 22436, Owner: SA-ITS-APSMDDINT-QA8, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 20440, Owner: SA-ITS-APSMDDINT-QA8, CMD: "D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe"  "/database={OMP_JNJ_MD_ATOMSP_QA8_utl@QNV77005}" "/AGEN
+T" "/cuprof={OMP Dispatcher Agent}" "/CUApplication=DSP" "/PAK={D:\OMClient\bin\Dispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_
+qa5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\R04_07b\04_07b_12\pak\ATOM_SP_UTL_DSP_04_07b_12.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD
+_ATOMSP_QA8\OMPartners\spqa8\dispatcher" "/LOGDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA8\OMPartners\omdata\spqa8\dispatcher\Agent"  "/Invisible" %DSPRunArguments%
+ "/debug_dsp_wmic"
+[DEBUG] PID: 18756, Owner: SYSTEM, CMD: "C:\Program Files\Cisco\Orbital\orbital.exe"
+[DEBUG] PID: 13044, Owner: SYSTEM, CMD: "C:\Program Files\Cisco\Orbital\osqueryd.exe" --utc=true --events_max=50000 --logger_min_stderr=1 --pidfile=C:\Windows\system32\config\systemp
+rofile\AppData\Roaming\CiscoOrbital\osqueryd.pid --events_expiry=3600 --extensions_socket=\\.\pipe\orbital-osquery.em --flagfile= --disable_watchdog=true --force=true --config_path= 
+--database_path=C:\Windows\system32\config\systemprofile\AppData\Roaming\CiscoOrbital\osqueryd_db --disable_events=true --disable_tables=augeas,carves,curl,curl_certificate,mdfind,nt
+fs_journal_events,powershell_events,wifi_survey,windows_events,ycloud_instance_metadata,orbital_remote_python --extensions_autoload= --logger_plugin=
+[DEBUG] PID: 1712, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 11216, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 17840, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 2200, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 20636, Owner: DWM-164, CMD: "dwm.exe"
+[DEBUG] PID: 22316, Owner: UMFD-164, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 14508, Owner: kmei, CMD: rdpclip
+[DEBUG] PID: 6424, Owner: kmei, CMD: sihost.exe
+[DEBUG] PID: 20552, Owner: kmei, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 820, Owner: kmei, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 21420, Owner: kmei, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 23088, Owner: kmei, CMD: "C:\Windows\System32\rdpinput.EXE" 
+[DEBUG] PID: 14600, Owner: kmei, CMD: C:\Windows\system32\rdpinit.exe
+[DEBUG] PID: 3160, Owner: kmei, CMD: "ctfmon.exe"
+[DEBUG] PID: 18056, Owner: kmei, CMD: /QuitInfo:00000000000018E0;0000000000001884;  
+[DEBUG] PID: 17552, Owner: kmei, CMD: /loadhooks /Parent:0000000000004688
+[DEBUG] PID: 12700, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k AppReadiness -p -s AppReadiness
+[DEBUG] PID: 12904, Owner: kmei, CMD: "C:\Windows\System32\rdpshell.exe" -1563323061
+[DEBUG] PID: 9728, Owner: kmei, CMD: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\spqa5\b
+in\menu\base\OMPartners.men" "/TITLE={OMP Plus - spqa5}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\spqa5\bin\customerlogo.png" /NOSPLASH "/
+cudir=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\spqa5\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartn
+ers\omdata\spqa5\user\kmei\OMMenu" 
+[DEBUG] PID: 11540, Owner: kmei, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 18008, Owner: kmei, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 15172, Owner: kmei, CMD: "D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe"  "/database={OMP_JNJ_MD_ATOMSP_QA5_opr@QNV77005}" "/PAK={D:\OMClient\bin
+\META_EDT_06_09_020.pak,D:\OMClient\bin\REF_OPR_EDT_06_09_028.pak,D:\OMClient\bin\DEM_OPR_EDT_06_09_021.pak,D:\OMClient\bin\STS_OPR_DM_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_
+qa5_omp\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_OPR_EDT_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\R04_
+07b\04_07b_12\pak\ATOM_SP_OPR_EDT_04_07b_12.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_orth
+o_cust_OPR_EDT_last_DEV_20250725130525.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\spqa5\editor" "/CUPROFILE={Upload Data Vali
+dation Data viewer}" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\omdata\spqa5\user\kmei\editor\operational\Upload Data Validation Data viewer"  /VI
+EW "/LICENSEDOMAIN="  "/PROFILER=NORMAL"  /ProfilerUniqueFileName /archivefiles=profiler_log*.tsv
+[DEBUG] PID: 2828, Owner: kmei, CMD: "D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe" "/database={OMP_JNJ_MD_ATOMSP_QA5_utl@QNV77005}" "/PAK={D:\OMClient\bin\D
+ispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\R04_07b\04_07b_12\pak\AT
+OM_SP_UTL_DSP_04_07b_12.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_ortho_cust_UTL_DSP_last_
+DEV_20250725130525.pak}" "/VIEW" "/cuprof={OMP Dispatcher Viewer}" "/CUApplication=DSP" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\
+spqa5\dispatcher" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\omdata\spqa5\user\kmei\dispatcher\viewer"
+[DEBUG] PID: 21216, Owner: kmei, CMD: notepad.exe \\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\omdata\spqa5\dispatcher\Inbound\SP_Full\LogFiles\847712\847712
+_2\ompplus_06_09_051_x64u_847712_2.dsp.out
+[DEBUG] PID: 13336, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 1292, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 10536, Owner: DWM-165, CMD: "dwm.exe"
+[DEBUG] PID: 7440, Owner: UMFD-165, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 17696, Owner: Admin_VPasupu1, CMD: rdpclip
+[DEBUG] PID: 16328, Owner: Admin_VPasupu1, CMD: sihost.exe
+[DEBUG] PID: 12180, Owner: Admin_VPasupu1, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 19908, Owner: Admin_VPasupu1, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 18920, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 3924, Owner: Admin_VPasupu1, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 17664, Owner: Admin_VPasupu1, CMD: "C:\Windows\System32\rdpinput.EXE" 
+[DEBUG] PID: 9192, Owner: Admin_VPasupu1, CMD: C:\Windows\Explorer.EXE
+[DEBUG] PID: 21524, Owner: Admin_VPasupu1, CMD: "ctfmon.exe"
+[DEBUG] PID: 9340, Owner: Admin_VPasupu1, CMD: /QuitInfo:0000000000001850;000000000000167C;  
+[DEBUG] PID: 20588, Owner: Admin_VPasupu1, CMD: /loadhooks /Parent:000000000000247c
+[DEBUG] PID: 22568, Owner: Admin_VPasupu1, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 21356, Owner: Admin_VPasupu1, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 15908, Owner: Admin_VPasupu1, CMD: "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" -ServerName:App.AppXtk181tbxbce2qsex02s8tw7hfxa9xb3t
+.mca
+[DEBUG] PID: 7992, Owner: Admin_VPasupu1, CMD: "C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe" -ServerName:CortanaUI.AppXa50dqqa5gqv4a428c9y1jjw7m3btvepj
+.mca
+[DEBUG] PID: 19916, Owner: Admin_VPasupu1, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 1348, Owner: Admin_VPasupu1, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 22628, Owner: Admin_VPasupu1, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 15028, Owner: Admin_VPasupu1, CMD: "C:\Windows\CCM\SCNotification.exe"
+[DEBUG] PID: 18508, Owner: Admin_VPasupu1, CMD: C:\Windows\System32\smartscreen.exe -Embedding
+[DEBUG] PID: 3828, Owner: Admin_VPasupu1, CMD: "C:\Program Files\Avecto\Privilege Guard Client\PGSystemTray.exe" 
+[DEBUG] PID: 11800, Owner: Admin_VPasupu1, CMD: "C:\Program Files\Trend Micro\Deep Security Agent\Notifier.exe" 
+[DEBUG] PID: 23052, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\TaniumClient.exe" -c
+[DEBUG] PID: 2312, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 21388, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 23264, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 14324, Owner: DWM-166, CMD: "dwm.exe"
+[DEBUG] PID: 13284, Owner: UMFD-166, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 17360, Owner: SA-ITS-APSMDINT-LAB, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 14396, Owner: SA-ITS-APSMDINT-LAB, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 18952, Owner: SA-ITS-APSMDINT-LAB, CMD: rdpclip
+[DEBUG] PID: 14780, Owner: SA-ITS-APSMDINT-LAB, CMD: sihost.exe
+[DEBUG] PID: 15580, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 12260, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 21936, Owner: SA-ITS-APSMDINT-LAB, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 5408, Owner: SA-ITS-APSMDINT-LAB, CMD: "ctfmon.exe"
+[DEBUG] PID: 16772, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\Explorer.EXE
+[DEBUG] PID: 16284, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" -ServerName:App.AppXtk181tbxbce2qsex02s8tw7hfxa
+9xb3t.mca
+[DEBUG] PID: 4208, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe" -ServerName:CortanaUI.AppXa50dqqa5gqv4a428c9y1jjw7m3b
+tvepj.mca
+[DEBUG] PID: 13048, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 3856, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 12156, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 6988, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\system32\DllHost.exe /Processid:{973D20D7-562D-44B9-B70B-5A0F49CCDF3F}
+[DEBUG] PID: 16704, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\CCM\SCNotification.exe"
+[DEBUG] PID: 15076, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\System32\smartscreen.exe -Embedding
+[DEBUG] PID: 14668, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\system32\taskmgr.exe" /7
+[DEBUG] PID: 19240, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Program Files\Avecto\Privilege Guard Client\PGSystemTray.exe" 
+[DEBUG] PID: 5432, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Program Files\Trend Micro\Deep Security Agent\Notifier.exe" 
+[DEBUG] PID: 11140, Owner: Admin_VPasupu1, CMD: "C:\Windows\system32\taskmgr.exe" /4
+[DEBUG] PID: 10496, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s NetSetupSvc
+[DEBUG] PID: 17784, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run-framework
+[DEBUG] PID: 17852, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 23212, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\TaniumCX.exe" crashdb "--database=C:\Program Files (x86)\Tanium\Tanium Client\Data/crashdb" --ini
+tial-client-data=0x370,0x374,0x378,0x348,0x37c,0x18343f0,0x1834400,0x1834410
+[DEBUG] PID: 3588, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose SupportCX.dll
+[DEBUG] PID: 12888, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumComply.dll
+[DEBUG] PID: 5288, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumConfig.dll
+[DEBUG] PID: 20716, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumDEC.dll
+[DEBUG] PID: 14428, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumDiscover.dll
+[DEBUG] PID: 15368, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumExtras.dll
+[DEBUG] PID: 21272, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumIndex.dll
+[DEBUG] PID: 22396, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumPerformance.dll
+[DEBUG] PID: 12652, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumProvision.dll
+[DEBUG] PID: 9080, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumSoftwareManager.dll
+[DEBUG] PID: 10560, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumTSDB.dll
+[DEBUG] PID: 14988, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\Tools\\PerformanceTSDB\\TaniumTSDB.exe" --config.file "config\\TaniumTSDB.1760103147.json" --
+log.level warn
+[DEBUG] PID: 18864, Owner: SYSTEM, CMD: cmd.exe /d /c "TPython\\TPython.bat" Tools/SoftwareManagement/py/swmgr/main.py process start-fg
+[DEBUG] PID: 19300, Owner: SYSTEM, CMD: cscript.exe "C:\\Program Files (x86)\\Tanium\\Tanium Client\\Patch\\lib\\tanium-patch.min.vbs"
+[DEBUG] PID: 22128, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\python312\TPython.exe"  Tools/SoftwareManagement/py/swmgr/main.py process start-fg
+[DEBUG] PID: 3136, Owner: LOCAL SERVICE, CMD: C:\Windows\sysWOW64\wbem\wmiprvse.exe -secured -Embedding
+[DEBUG] PID: 1920, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 19868, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 22744, Owner: UMFD-167, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 14344, Owner: DWM-167, CMD: "dwm.exe"
+[DEBUG] PID: 20608, Owner: Admin_MKuma232, CMD: rdpclip
+[DEBUG] PID: 13604, Owner: Admin_MKuma232, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 15964, Owner: Admin_MKuma232, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 11840, Owner: Admin_MKuma232, CMD: sihost.exe
+[DEBUG] PID: 16016, Owner: Admin_MKuma232, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 15948, Owner: Admin_MKuma232, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 5072, Owner: Admin_MKuma232, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 21436, Owner: Admin_MKuma232, CMD: C:\Windows\Explorer.EXE
+[DEBUG] PID: 20916, Owner: Admin_MKuma232, CMD: "ctfmon.exe"
+[DEBUG] PID: 21900, Owner: Admin_MKuma232, CMD: "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" -ServerName:App.AppXtk181tbxbce2qsex02s8tw7hfxa9xb3t
+.mca
+[DEBUG] PID: 11172, Owner: Admin_MKuma232, CMD: "C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe" -ServerName:CortanaUI.AppXa50dqqa5gqv4a428c9y1jjw7m3btvep
+j.mca
+[DEBUG] PID: 10764, Owner: Admin_MKuma232, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 21472, Owner: Admin_MKuma232, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 12960, Owner: Admin_MKuma232, CMD: C:\Windows\system32\DllHost.exe /Processid:{973D20D7-562D-44B9-B70B-5A0F49CCDF3F}
+[DEBUG] PID: 22548, Owner: Admin_MKuma232, CMD: "C:\Windows\CCM\SCNotification.exe"
+[DEBUG] PID: 17920, Owner: Admin_MKuma232, CMD: C:\Windows\System32\smartscreen.exe -Embedding
+[DEBUG] PID: 10032, Owner: Admin_MKuma232, CMD: "C:\Windows\system32\mmc.exe" "C:\Windows\system32\taskschd.msc" /s
+[DEBUG] PID: 18128, Owner: Admin_MKuma232, CMD: "C:\Program Files\Avecto\Privilege Guard Client\PGSystemTray.exe" 
+[DEBUG] PID: 22560, Owner: Admin_MKuma232, CMD: "C:\Program Files\Trend Micro\Deep Security Agent\Notifier.exe" 
+[DEBUG] PID: 8324, Owner: SA-ITS-APSMDDINT-QA, CMD: cmd.exe /c "("D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe" "/database={OMP_JNJ_MD_ATOMSP_QA5_utl@QNV7700
+5}" "/AGENT" "/cuprof={OMP Dispatcher Agent}" "/CUApplication=DSP" "/PAK={D:\OMClient\bin\Dispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jn
+j.com\mdd_qa5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\R04_07b\04_07b_12\pak\ATOM_SP_UTL_DSP_04_07b_12.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMPInstallpoint\R06_09\Sol
+utions\JnJ_GlobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_ortho_cust_UTL_DSP_last_DEV_20250725130525.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_J
+NJ_MD_ATOMSP_QA5\OMPartners\spqa5\dispatcher" "/LOGDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\omdata\spqa5\dispatcher\Agent"  "/Invisible" %DSPRunArgum
+ents% "/debug_dsp_wmic") & ("\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\spqa5\dispatcher\bin\DispatcherManagementAction.cmd" RestartUponFailure /agent)"
+[DEBUG] PID: 3912, Owner: SA-ITS-APSMDDINT-QA, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 6816, Owner: SA-ITS-APSMDDINT-QA, CMD: "D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe"  "/database={OMP_JNJ_MD_ATOMSP_QA5_utl@QNV77005}" "/AGENT"
+ "/cuprof={OMP Dispatcher Agent}" "/CUApplication=DSP" "/PAK={D:\OMClient\bin\Dispatcher_EDT_06_09A_008.pak,D:\OMClient\bin\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa
+5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\R04_07b\04_07b_12\pak\ATOM_SP_UTL_DSP_04_07b_12.pak,\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_G
+lobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_ortho_cust_UTL_DSP_last_DEV_20250725130525.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP
+_QA5\OMPartners\spqa5\dispatcher" "/LOGDIR=\\awsusdmkfsxn01.jnj.com\mdd_qa5_omp\OMP_JNJ_MD_ATOMSP_QA5\OMPartners\omdata\spqa5\dispatcher\Agent"  "/Invisible" %DSPRunArguments% "/debu
+g_dsp_wmic"
+[DEBUG] PID: 3144, Owner: Admin_VPasupu1, CMD: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners
+\development\bin\menu\base\OMPartners.men" "/TITLE={OMP Plus - development}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\custom
+erlogo.png" /NOSPLASH "/cudir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\O
+MP_JNJ_MD_ATOM_LAB\OMPartners\omdata\development\user\admin_vpasupu1\OMMenu" 
+[DEBUG] PID: 19620, Owner: SYSTEM, CMD: "LogonUI.exe" /flags:0x0 /state0:0x6d22b855 /state1:0x41c64e6d
+[DEBUG] PID: 14732, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s wuauserv
+[DEBUG] PID: 6784, Owner: SYSTEM, CMD: "LogonUI.exe" /flags:0x0 /state0:0x6d1d1055 /state1:0x41c64e6d
+[DEBUG] PID: 19488, Owner: SYSTEM, CMD: C:\Windows\system32\vssvc.exe
+[DEBUG] PID: 11792, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\TaniumClient.exe" -a
+[DEBUG] PID: 13104, Owner: NETWORK SERVICE, CMD: C:\Windows\sysWOW64\wbem\wmiprvse.exe -secured -Embedding
 
-if (-not $data -or $data.Count -eq 0) {
-    Write-Host "[ERROR] Input file empty or not found!" -ForegroundColor Red
-    exit
-}
+=============================
+[DEBUG] Processing MACHINE : AWSDMKNVAW0002
+[DEBUG] Target OSUSER      : admin_vpasupu1
+[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
+[DEBUG] Querying processes on AWSDMKNVAW0002 ...
+[DEBUG] PID: 0, Owner: Unknown, CMD: NoCommandLine
+[DEBUG] PID: 4, Owner: Unknown, CMD: NoCommandLine
+[DEBUG] PID: 120, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 668, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 780, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 856, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 864, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 928, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 1000, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 1008, Owner: SYSTEM, CMD: C:\Windows\system32\lsass.exe
+[DEBUG] PID: 736, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k DcomLaunch -p -s PlugPlay
+[DEBUG] PID: 1044, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k DcomLaunch -p
+[DEBUG] PID: 1072, Owner: UMFD-1, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 1068, Owner: UMFD-0, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 1164, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\svchost.exe -k RPCSS -p
+[DEBUG] PID: 1208, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k DcomLaunch -p -s LSM
+[DEBUG] PID: 1292, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\svchost.exe -k termsvcs -s TermService
+[DEBUG] PID: 1324, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -s W32Time
+[DEBUG] PID: 1332, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s nsi
+[DEBUG] PID: 1380, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p -s lmhosts
+[DEBUG] PID: 1396, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s NcbService
+[DEBUG] PID: 1452, Owner: SYSTEM, CMD: "LogonUI.exe" /flags:0x2 /state0:0xa3b75855 /state1:0x41c64e6d
+[DEBUG] PID: 1504, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s TimeBrokerSvc
+[DEBUG] PID: 1568, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\svchost.exe -k NetworkService -p -s Dnscache
+[DEBUG] PID: 1652, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s Dhcp
+[DEBUG] PID: 1668, Owner: DWM-1, CMD: "dwm.exe"
+[DEBUG] PID: 1688, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p -s EventLog
+[DEBUG] PID: 1832, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNoNetworkFirewall -p
+[DEBUG] PID: 1900, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k GPSvcGroup
+[DEBUG] PID: 1908, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s ProfSvc
+[DEBUG] PID: 1916, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s Themes
+[DEBUG] PID: 1928, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s EventSystem
+[DEBUG] PID: 1976, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\svchost.exe -k NetworkService -p -s NlaSvc
+[DEBUG] PID: 1636, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s SENS
+[DEBUG] PID: 2072, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalService -p -s netprofm
+[DEBUG] PID: 2080, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s Schedule
+[DEBUG] PID: 2088, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k winmgmt -s Winmgmt
+[DEBUG] PID: 2136, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+[DEBUG] PID: 2204, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s ShellHWDetection
+[DEBUG] PID: 2292, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s AudioEndpointBuilder
+[DEBUG] PID: 2300, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s FontCache
+[DEBUG] PID: 2468, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s IKEEXT
+[DEBUG] PID: 2476, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\svchost.exe -k NetworkServiceNetworkRestricted -p -s PolicyAgent
+[DEBUG] PID: 2484, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s WinHttpAutoProxySvc
+[DEBUG] PID: 2612, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k NetSvcs -p -s iphlpsvc
+[DEBUG] PID: 2664, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+[DEBUG] PID: 2772, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\svchost.exe -k NetworkService -p -s LanmanWorkstation
+[DEBUG] PID: 2804, Owner: SYSTEM, CMD: "C:\Windows\system32\rundll32.exe" C:\Windows\system32\pla.dll,PlaHost "Server Manager Performance Monitor" "$(Arg0)"
+[DEBUG] PID: 2924, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s UserManager
+[DEBUG] PID: 3104, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s UmRdpService
+[DEBUG] PID: 3284, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -s CertPropSvc
+[DEBUG] PID: 3312, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s SessionEnv
+[DEBUG] PID: 3564, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalServiceNoNetwork -p
+[DEBUG] PID: 3900, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s CDPSvc
+[DEBUG] PID: 3912, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k utcsvc -p
+[DEBUG] PID: 3920, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k LocalSystemNetworkRestricted -p -s SysMain
+[DEBUG] PID: 3928, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s Netman
+[DEBUG] PID: 3944, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s TrkWks
+[DEBUG] PID: 3936, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s sacsvr
+[DEBUG] PID: 3952, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\svchost.exe -k NetworkService -p -s CryptSvc
+[DEBUG] PID: 3968, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\svchost.exe -k NetworkService -p -s WinRM
+[DEBUG] PID: 3980, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 3996, Owner: SYSTEM, CMD: "c:\Program Files\Microsoft Monitoring Agent\Agent\HealthService.exe"
+[DEBUG] PID: 4004, Owner: SYSTEM, CMD: "c:\Program Files\Avecto\Privilege Guard Client\DefendpointBeyondInsightAdapter.exe"
+[DEBUG] PID: 4012, Owner: SYSTEM, CMD: C:\Windows\CCM\RemCtrl\CmRcService.exe
+[DEBUG] PID: 4020, Owner: SYSTEM, CMD: "C:\Program Files\Amazon\SSM\amazon-ssm-agent.exe"
+[DEBUG] PID: 4048, Owner: SYSTEM, CMD: "C:\Program Files\rise\bin\risebot.exe"
+[DEBUG] PID: 4060, Owner: SYSTEM, CMD: "C:\Program Files\Cisco\AMP\7.5.17.21680\sfc.exe"
+[DEBUG] PID: 4088, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\ir_agent.exe"
+[DEBUG] PID: 3460, Owner: SYSTEM, CMD: "c:\Program Files (x86)\ManageSoft\Schedule Agent\ndinit.exe"
+[DEBUG] PID: 1424, Owner: SYSTEM, CMD: "c:\Program Files (x86)\ManageSoft\Security Agent\mgssecsvc.exe"
+[DEBUG] PID: 3740, Owner: SYSTEM, CMD: "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe" /service
+[DEBUG] PID: 4156, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\TaniumClient.exe" --service
+[DEBUG] PID: 4244, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k smbsvcs -s LanmanServer
+[DEBUG] PID: 4964, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 5684, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 5812, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 7060, Owner: SYSTEM, CMD: C:\Windows\system32\DllHost.exe /Processid:{3EB3C877-1F16-487C-9050-104DBCD66683}
+[DEBUG] PID: 7408, Owner: SYSTEM, CMD: ndtask.exe
+[DEBUG] PID: 9168, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k appmodel -p -s StateRepository
+[DEBUG] PID: 10056, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNoNetwork -p -s pla
+[DEBUG] PID: 2212, Owner: SYSTEM, CMD: C:\Windows\CCM\CcmExec.exe
+[DEBUG] PID: 2500, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 4084, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 11136, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 10720, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalServiceNoNetwork -p -s DPS
+[DEBUG] PID: 8040, Owner: NETWORK SERVICE, CMD: C:\Windows\System32\msdtc.exe
+[DEBUG] PID: 10604, Owner: SYSTEM, CMD: "c:\Program Files (x86)\Microsoft PFE Remediation for Configuration Manager\PFERemediation.exe"
+[DEBUG] PID: 9428, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k LocalSystemNetworkRestricted -p -s UALSVC
+[DEBUG] PID: 8856, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s UsoSvc
+[DEBUG] PID: 12284, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 7240, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s TokenBroker
+[DEBUG] PID: 9344, Owner: SYSTEM, CMD: C:\Windows\sysWOW64\wbem\wmiprvse.exe -Embedding
+[DEBUG] PID: 2116, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s TabletInputService
+[DEBUG] PID: 6480, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s Appinfo
+[DEBUG] PID: 12208, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+[DEBUG] PID: 4732, Owner: SYSTEM, CMD: C:\Windows\system32\dllhost.exe /Processid:{02D4B3F1-FD88-11D1-960D-00805FC79235}
+[DEBUG] PID: 2028, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s DsSvc
+[DEBUG] PID: 11488, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalService -p -s LicenseManager
+[DEBUG] PID: 14084, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s WdiSystemHost
+[DEBUG] PID: 15524, Owner: LOCAL SERVICE, CMD: C:\Windows\System32\svchost.exe -k LocalService -p -s WdiServiceHost
+[DEBUG] PID: 15320, Owner: NETWORK SERVICE, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 11760, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s AppMgmt
+[DEBUG] PID: 32348, Owner: SYSTEM, CMD: "c:\Program Files\Avecto\Privilege Guard Client\DefendpointService.exe"
+[DEBUG] PID: 9652, Owner: SYSTEM, CMD: "C:\Program Files\Microsoft Monitoring Agent\Agent\MonitoringHost.exe" -Embedding
+[DEBUG] PID: 24148, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 3572, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\svchost.exe -k LocalService -p -s fdPHost
+[DEBUG] PID: 32068, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k swprv
+[DEBUG] PID: 20964, Owner: SYSTEM, CMD: "C:\Program Files\Cisco\Orbital\orbital.exe"
+[DEBUG] PID: 22380, Owner: SYSTEM, CMD: "C:\Program Files\Cisco\Orbital\osqueryd.exe" --extensions_autoload= --force=true --utc=true --events_expiry=3600 --events_max=50000 --extensi
+ons_socket=\\.\pipe\orbital-osquery.em --logger_min_stderr=1 --database_path=C:\Windows\system32\config\systemprofile\AppData\Roaming\CiscoOrbital\osqueryd_db --disable_watchdog=true
+ --logger_plugin= --pidfile=C:\Windows\system32\config\systemprofile\AppData\Roaming\CiscoOrbital\osqueryd.pid --disable_events=true --disable_tables=augeas,carves,curl,curl_certific
+ate,mdfind,ntfs_journal_events,powershell_events,wifi_survey,windows_events,ycloud_instance_metadata,orbital_remote_python --flagfile= --config_path=
+[DEBUG] PID: 29408, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 26332, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\Notifier.exe" -service
+[DEBUG] PID: 10104, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\ds_monitor.exe"
+[DEBUG] PID: 20484, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k netsvcs -p -s NetSetupSvc
+[DEBUG] PID: 24188, Owner: SYSTEM, CMD: "C:\Program Files\Trend Micro\Cloud Endpoint\CloudEndpointService.exe" --service --env="prod" --region="eu1" --xid="a3456705-3df1-4ed7-95fc-d9
+a851797189"
+[DEBUG] PID: 9148, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /xbc_auth_sdk NcMvDhLINdVo0UJ4Ft8b
+[DEBUG] PID: 8548, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 29372, Owner: SYSTEM, CMD: "C:\Program Files\Trend Micro\Net Filter\tm_netsrv.exe"
+[DEBUG] PID: 9192, Owner: SYSTEM, CMD: "C:\Program Files\Trend Micro\Net Filter\tm_netsrv.exe"
+[DEBUG] PID: 3552, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 9792, Owner: SYSTEM, CMD: c:\telegraf\bin\telegraf.exe  --config c:\telegraf\telegraf.conf --config-directory c:\telegraf\telegraf.d
+[DEBUG] PID: 13112, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Trend Micro\\Endpoint Basecamp\\EndpointBasecamp.exe" /service
+[DEBUG] PID: 11996, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /svchost_vom
+[DEBUG] PID: 17484, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 17564, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /xbc_auth_sdk VHQgKQmct6BzcpdaZ2jM
+[DEBUG] PID: 2276, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /xbc_auth_sdk OokrhfebtDhKHaTUmW94
+[DEBUG] PID: 9044, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 17696, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 6872, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\dsa.exe" -a "ds_agent" -b -i -w "HKLM\Software\TrendMicro\Deep Security Agent\DataFolder" -e 
+"c:\Program Files\Trend Micro\Deep Security Agent\ext"
+[DEBUG] PID: 12840, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k DcomLaunch -p -s DeviceInstall
+[DEBUG] PID: 15280, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\dsa-connect.exe"  main
+[DEBUG] PID: 15516, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 31800, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\EndpointBasecamp.exe" /xbc_auth_sdk GC2IrqYoApsM60WbPEwC
+[DEBUG] PID: 20724, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\dsa-connect.exe" hub
+[DEBUG] PID: 10236, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 21148, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\unsecapp.exe -Embedding
+[DEBUG] PID: 1988, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\netagent\tm_netagent.exe" --metrics-file "c:\ProgramData\Trend Micro\Deep Security Agent\neta
+gent\metrics.json" --log-folder "c:\ProgramData\Trend Micro\Deep Security Agent\netagent\logs" --ptn-folder "c:\Program Files\Trend Micro\Deep Security Agent\netagent\pattern" --jat-
+folder "c:\Program Files\Trend Micro\Deep Security Agent\netagent\java\jattach" --jex-folder "c:\ProgramData\Trend Micro\Deep Security Agent\netagentjava"  --log-console=false --log-
+level 1 --tmCfg WyJMU0FQIiwiU3NsSW5ib3VuZCIsIlNzbE91dGJvdW5kIl0=
+[DEBUG] PID: 29044, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 16740, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\netagent\tm_netagent.exe" --metrics-file "c:\ProgramData\Trend Micro\Deep Security Agent\net
+agent\metrics.json" --log-folder "c:\ProgramData\Trend Micro\Deep Security Agent\netagent\logs" --ptn-folder "c:\Program Files\Trend Micro\Deep Security Agent\netagent\pattern" --jat
+-folder "c:\Program Files\Trend Micro\Deep Security Agent\netagent\java\jattach" --jex-folder "c:\ProgramData\Trend Micro\Deep Security Agent\netagentjava" --log-console=false --log-
+level 1 --tmCfg WyJMU0FQIiwiU3NsSW5ib3VuZCIsIlNzbE91dGJvdW5kIl0=
+[DEBUG] PID: 31248, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\AMSP\coreServiceShell.exe" coreFrameworkHost.exe -m=nb -dt=100 -ad -bt=0
+[DEBUG] PID: 12440, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 17160, Owner: SYSTEM, CMD: coreFrameworkHost.exe 31248 1
+[DEBUG] PID: 4200, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 26484, Owner: SYSTEM, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-service true
+[DEBUG] PID: 30388, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 14736, Owner: LOCAL SERVICE, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 16456, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 27400, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 25752, Owner: DWM-24, CMD: "dwm.exe"
+[DEBUG] PID: 500, Owner: UMFD-24, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 19224, Owner: ssarang6, CMD: rdpclip
+[DEBUG] PID: 3468, Owner: ssarang6, CMD: sihost.exe
+[DEBUG] PID: 29996, Owner: ssarang6, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 15604, Owner: ssarang6, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 24752, Owner: ssarang6, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 4896, Owner: ssarang6, CMD: "ctfmon.exe"
+[DEBUG] PID: 26792, Owner: ssarang6, CMD: taskhostw.exe
+[DEBUG] PID: 3512, Owner: ssarang6, CMD: "C:\Windows\System32\rdpinput.EXE" 
+[DEBUG] PID: 22480, Owner: ssarang6, CMD: C:\Windows\system32\rdpinit.exe
+[DEBUG] PID: 22700, Owner: ssarang6, CMD: /QuitInfo:0000000000003F28;0000000000003CDC;  
+[DEBUG] PID: 29144, Owner: ssarang6, CMD: /loadhooks /Parent:00000000000058ac
+[DEBUG] PID: 1560, Owner: SYSTEM, CMD: C:\Windows\System32\svchost.exe -k AppReadiness -p -s AppReadiness
+[DEBUG] PID: 26636, Owner: ssarang6, CMD: "C:\Windows\System32\rdpshell.exe" -1026005088
+[DEBUG] PID: 11296, Owner: ssarang6, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 8732, Owner: ssarang6, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 12204, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 2444, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 17944, Owner: DWM-25, CMD: "dwm.exe"
+[DEBUG] PID: 30184, Owner: UMFD-25, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 22124, Owner: phegde3, CMD: rdpclip
+[DEBUG] PID: 12544, Owner: phegde3, CMD: sihost.exe
+[DEBUG] PID: 14032, Owner: phegde3, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 31012, Owner: phegde3, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 10552, Owner: phegde3, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 31888, Owner: phegde3, CMD: taskhostw.exe
+[DEBUG] PID: 4812, Owner: phegde3, CMD: "ctfmon.exe"
+[DEBUG] PID: 14388, Owner: phegde3, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 19300, Owner: phegde3, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 6016, Owner: phegde3, CMD: C:\Windows\system32\rdpinit.exe
+[DEBUG] PID: 23152, Owner: phegde3, CMD: "C:\Windows\System32\rdpshell.exe" -836236758
+[DEBUG] PID: 19260, Owner: ssarang6, CMD: C:\Windows\System32\rundll32.exe shell32.dll,SHCreateLocalServerRunDll {9BA05972-F6A8-11CF-A442-00A0C90A8F39} -Embedding
+[DEBUG] PID: 16948, Owner: phegde3, CMD: C:\Windows\System32\rundll32.exe shell32.dll,SHCreateLocalServerRunDll {9BA05972-F6A8-11CF-A442-00A0C90A8F39} -Embedding
+[DEBUG] PID: 25396, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 12688, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 8420, Owner: DWM-26, CMD: "dwm.exe"
+[DEBUG] PID: 20204, Owner: UMFD-26, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 27276, Owner: AEHREN, CMD: rdpclip
+[DEBUG] PID: 9444, Owner: AEHREN, CMD: sihost.exe
+[DEBUG] PID: 30756, Owner: AEHREN, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 26640, Owner: AEHREN, CMD: taskhostw.exe
+[DEBUG] PID: 17132, Owner: AEHREN, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 16640, Owner: AEHREN, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 32248, Owner: AEHREN, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 19988, Owner: AEHREN, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 25184, Owner: AEHREN, CMD: "C:\Windows\System32\rdpinput.EXE" 
+[DEBUG] PID: 18244, Owner: AEHREN, CMD: "ctfmon.exe"
+[DEBUG] PID: 31436, Owner: AEHREN, CMD: C:\Windows\system32\rdpinit.exe
+[DEBUG] PID: 22024, Owner: AEHREN, CMD: "C:\Windows\System32\rdpshell.exe" 1728947852
+[DEBUG] PID: 9728, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 10060, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 18364, Owner: DWM-32, CMD: "dwm.exe"
+[DEBUG] PID: 16000, Owner: UMFD-32, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 3676, Owner: SA-ITS-APSMDINT-LAB, CMD: rdpclip
+[DEBUG] PID: 23016, Owner: SA-ITS-APSMDINT-LAB, CMD: sihost.exe
+[DEBUG] PID: 29132, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 17064, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 5268, Owner: SA-ITS-APSMDINT-LAB, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 25100, Owner: SA-ITS-APSMDINT-LAB, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 19516, Owner: SA-ITS-APSMDINT-LAB, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 32044, Owner: SA-ITS-APSMDINT-LAB, CMD: taskhostw.exe
+[DEBUG] PID: 504, Owner: SA-ITS-APSMDINT-LAB, CMD: "ctfmon.exe"
+[DEBUG] PID: 1608, Owner: SYSTEM, CMD: C:\Windows\system32\wbem\wmiprvse.exe
+[DEBUG] PID: 4784, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\Explorer.EXE
+[DEBUG] PID: 9996, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" -ServerName:App.AppXtk181tbxbce2qsex02s8tw7hfxa9
+xb3t.mca
+[DEBUG] PID: 10856, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe" -ServerName:CortanaUI.AppXa50dqqa5gqv4a428c9y1jjw7m3
+btvepj.mca
+[DEBUG] PID: 30648, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 26520, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 23480, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 27772, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\CCM\SCNotification.exe"
+[DEBUG] PID: 20352, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\System32\smartscreen.exe -Embedding
+[DEBUG] PID: 21252, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Program Files\Avecto\Privilege Guard Client\PGSystemTray.exe" 
+[DEBUG] PID: 476, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Program Files\Trend Micro\Deep Security Agent\Notifier.exe" 
+[DEBUG] PID: 16784, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\modules\vom\modules\UiBridgeModule\VOneAgentConsole\VOneAgentConsoleTray.ex
+e" 
+[DEBUG] PID: 11560, Owner: SA-ITS-APSMDINT-LAB, CMD:  /updateInstalled /background
+[DEBUG] PID: 10004, Owner: ssarang6, CMD: C:\Windows\explorer.exe /factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b} -Embedding
+[DEBUG] PID: 11332, Owner: ssarang6, CMD: C:\Windows\System32\rundll32.exe C:\Windows\System32\shell32.dll,SHCreateLocalServerRunDll {3eef301f-b596-4c0b-bd92-013beafce793} -Embedding
 
-Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
+[DEBUG] PID: 11052, Owner: ssarang6, CMD: C:\Windows\System32\rundll32.exe C:\Windows\System32\shell32.dll,SHCreateLocalServerRunDll {9aa46009-3ce0-458a-a354-715610a075e6} -Embedding
 
-# Parse input file into objects
-$entries = @()
-foreach ($line in $data) {
-    if ([string]::IsNullOrWhiteSpace($line)) { continue }
+[DEBUG] PID: 11212, Owner: ssarang6, CMD: C:\Windows\explorer.exe /factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b} -Embedding
+[DEBUG] PID: 21140, Owner: SYSTEM, CMD: C:\Windows\system32\svchost.exe -k netsvcs -p -s wuauserv
+[DEBUG] PID: 11920, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\system32\taskmgr.exe" /4
+[DEBUG] PID: 8320, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\TaniumClient.exe" -c
+[DEBUG] PID: 9960, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 14848, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 6832, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 18064, Owner: DWM-35, CMD: "dwm.exe"
+[DEBUG] PID: 31596, Owner: UMFD-35, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 29148, Owner: Admin_VPasupu1, CMD: rdpclip
+[DEBUG] PID: 29260, Owner: Admin_VPasupu1, CMD: sihost.exe
+[DEBUG] PID: 1716, Owner: Admin_VPasupu1, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 25796, Owner: Admin_VPasupu1, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 6500, Owner: Admin_VPasupu1, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 548, Owner: Admin_VPasupu1, CMD: "C:\Windows\System32\rdpinput.EXE" 
+[DEBUG] PID: 28820, Owner: Admin_VPasupu1, CMD: C:\Windows\Explorer.EXE
+[DEBUG] PID: 31936, Owner: Admin_VPasupu1, CMD: "ctfmon.exe"
+[DEBUG] PID: 7400, Owner: Admin_VPasupu1, CMD: /QuitInfo:0000000000004108;000000000000410C;  
+[DEBUG] PID: 20712, Owner: Admin_VPasupu1, CMD: /loadhooks /Parent:0000000000001ce8
+[DEBUG] PID: 31812, Owner: Admin_VPasupu1, CMD: C:\Windows\System32\smartscreen.exe -Embedding
+[DEBUG] PID: 31704, Owner: Admin_VPasupu1, CMD: "C:\Windows\CCM\SCNotification.exe"
+[DEBUG] PID: 31804, Owner: Admin_VPasupu1, CMD: "C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe" -ServerName:App.AppXtk181tbxbce2qsex02s8tw7hfxa9xb3t
+.mca
+[DEBUG] PID: 26416, Owner: Admin_VPasupu1, CMD: "C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe" -ServerName:CortanaUI.AppXa50dqqa5gqv4a428c9y1jjw7m3btvep
+j.mca
+[DEBUG] PID: 19700, Owner: Admin_VPasupu1, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 560, Owner: Admin_VPasupu1, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 12036, Owner: Admin_VPasupu1, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 22712, Owner: Admin_VPasupu1, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 25828, Owner: Admin_VPasupu1, CMD: C:\Windows\system32\SettingSyncHost.exe -Embedding
+[DEBUG] PID: 25420, Owner: Admin_VPasupu1, CMD: C:\Windows\System32\RuntimeBroker.exe -Embedding
+[DEBUG] PID: 17668, Owner: Admin_VPasupu1, CMD: "C:\Program Files\Avecto\Privilege Guard Client\PGSystemTray.exe" 
+[DEBUG] PID: 7632, Owner: Admin_VPasupu1, CMD: "C:\Program Files\Microsoft OneDrive\OneDrive.exe" /background /setautostart
+[DEBUG] PID: 32020, Owner: Admin_VPasupu1, CMD: "C:\Program Files\Trend Micro\Deep Security Agent\Notifier.exe" 
+[DEBUG] PID: 20548, Owner: Admin_VPasupu1, CMD: "C:\Program Files (x86)\Trend Micro\Endpoint Basecamp\modules\vom\modules\UiBridgeModule\VOneAgentConsole\VOneAgentConsoleTray.exe" 
+[DEBUG] PID: 19712, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 6824, Owner: SYSTEM, CMD: winlogon.exe
+[DEBUG] PID: 18764, Owner: DWM-36, CMD: "dwm.exe"
+[DEBUG] PID: 11120, Owner: UMFD-36, CMD: "fontdrvhost.exe"
+[DEBUG] PID: 6108, Owner: PSanjayS, CMD: rdpclip
+[DEBUG] PID: 13988, Owner: PSanjayS, CMD: sihost.exe
+[DEBUG] PID: 20332, Owner: PSanjayS, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s CDPUserSvc
+[DEBUG] PID: 4808, Owner: PSanjayS, CMD: C:\Windows\system32\svchost.exe -k UnistackSvcGroup -s WpnUserService
+[DEBUG] PID: 9268, Owner: PSanjayS, CMD: taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+[DEBUG] PID: 25376, Owner: PSanjayS, CMD: taskhostw.exe
+[DEBUG] PID: 17152, Owner: PSanjayS, CMD: C:\Windows\system32\rdpinit.exe
+[DEBUG] PID: 19264, Owner: PSanjayS, CMD: "ctfmon.exe"
+[DEBUG] PID: 30076, Owner: PSanjayS, CMD: "C:\Windows\System32\rdpshell.exe" -142898051
+[DEBUG] PID: 9036, Owner: PSanjayS, CMD: "c:\Program Files\Trend Micro\Deep Security Agent\wrs\dsa-wrs-app.exe" --incognito-child true
+[DEBUG] PID: 31688, Owner: PSanjayS, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 20300, Owner: SYSTEM, CMD: "LogonUI.exe" /flags:0x0 /state0:0x4f9e7855 /state1:0x41c64e6d
+[DEBUG] PID: 3372, Owner: SA-ITS-APSMDINT-LAB, CMD: C:\Windows\system32\DllHost.exe /Processid:{973D20D7-562D-44B9-B70B-5A0F49CCDF3F}
+[DEBUG] PID: 11644, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\system32\cmd.exe" 
+[DEBUG] PID: 30624, Owner: SA-ITS-APSMDINT-LAB, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 32496, Owner: SA-ITS-APSMDINT-LAB, CMD: "C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe" 
+[DEBUG] PID: 22128, Owner: SYSTEM, CMD: "LogonUI.exe" /flags:0x0 /state0:0x4f808055 /state1:0x41c64e6d
+[DEBUG] PID: 6304, Owner: SYSTEM, CMD: /QuitInfo:0000000000003EB8;0000000000003CF0; /ManualLaunch 
+[DEBUG] PID: 4184, Owner: LOCAL SERVICE, CMD: C:\Windows\sysWOW64\wbem\wmiprvse.exe -secured -Embedding
+[DEBUG] PID: 4032, Owner: Admin_VPasupu1, CMD: "C:\Windows\system32\taskmgr.exe" /4
+[DEBUG] PID: 1544, Owner: SYSTEM, CMD: "LogonUI.exe" /flags:0x0 /state0:0x4fc96855 /state1:0x41c64e6d
+[DEBUG] PID: 19676, Owner: PSanjayS, CMD: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartne
+rs\sppredev5\bin\menu\base\OMPartners.men" "/TITLE={OMP Plus - sppredev5}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartners\sppredev5\bin\cus
+tomerlogo.png" /NOSPLASH "/cudir=\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartners\sppredev5\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_d
+ev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartners\omdata\sppredev5\user\PSanjayS\OMMenu" 
+[DEBUG] PID: 24324, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run-framework
+[DEBUG] PID: 16120, Owner: SYSTEM, CMD: \??\C:\Windows\system32\conhost.exe 0x4
+[DEBUG] PID: 28360, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\TaniumCX.exe" crashdb "--database=C:\Program Files (x86)\Tanium\Tanium Client\Data/crashdb" --ini
+tial-client-data=0x378,0x37c,0x388,0x34c,0x38c,0x19a43f0,0x19a4400,0x19a4410
+[DEBUG] PID: 28212, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose SupportCX.dll
+[DEBUG] PID: 24392, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumComply.dll
+[DEBUG] PID: 28744, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumConfig.dll
+[DEBUG] PID: 32156, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumDEC.dll
+[DEBUG] PID: 4252, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumDiscover.dll
+[DEBUG] PID: 17412, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumExtras.dll
+[DEBUG] PID: 31164, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumIndex.dll
+[DEBUG] PID: 26080, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumPerformance.dll
+[DEBUG] PID: 19012, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumProvision.dll
+[DEBUG] PID: 12168, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX_ssl1.exe" run --purpose TaniumRisk.dll
+[DEBUG] PID: 10728, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumSoftwareManager.dll
+[DEBUG] PID: 4068, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\TaniumCX.exe" run --purpose TaniumTSDB.dll
+[DEBUG] PID: 1720, Owner: PSanjayS, CMD: "D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe"  "/database={OMP_JNJ_MD_ATOMSP_PREDEV5_opr@DNV35003}" "/PAK={\\awsusd
+mkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeAndPakSource\META_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeAndPakSource\REF_OPR_EDT_0
+6_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeAndPakSource\DEM_OPR_EDT_06_09_021.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeAn
+dPakSource\STS_OPR_DM_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_OPR_EDT_06_09A_036.pak,\\awsusdmkfsxn01.jnj
+.com\mdd_dev5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\last\last_DEV_20251007115356\pak\ATOM_SP_OPR_EDT_last_DEV_20251007115356.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\
+OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_ortho_cust_OPR_EDT_last_DEV_20250725130525.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01
+.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartners\sppredev5\editor" "/CUPROFILE={IDoc Validation}" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\O
+MPartners\omdata\sppredev5\user\PSanjayS\editor\operational\IDoc Validation" "/%LICENSEDOMAINGENERAL%"  "/PROFILER=NORMAL"  /ProfilerUniqueFileName /archivefiles=profiler_log*.tsv
+[DEBUG] PID: 1316, Owner: SYSTEM, CMD: "C:\\Program Files (x86)\\Tanium\\Tanium Client\\Tools\\PerformanceTSDB\\TaniumTSDB.exe" --config.file "config\\TaniumTSDB.1760103950.json" --l
+og.level warn
+[DEBUG] PID: 29668, Owner: SYSTEM, CMD: cmd.exe /d /c "TPython\\TPython.bat" Tools/SoftwareManagement/py/swmgr/main.py process start-fg
+[DEBUG] PID: 22052, Owner: SYSTEM, CMD: cscript.exe "C:\\Program Files (x86)\\Tanium\\Tanium Client\\Patch\\lib\\tanium-patch.min.vbs"
+[DEBUG] PID: 27128, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\python312\TPython.exe"  Tools/SoftwareManagement/py/swmgr/main.py process start-fg
+[DEBUG] PID: 21624, Owner: PSanjayS, CMD: "D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe"  "/database={OMP_JNJ_MD_ATOMSP_PREDEV5_opr@DNV35003}" "/PAK={\\awsus
+dmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeAndPakSource\META_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeAndPakSource\REF_OPR_EDT_
+06_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeAndPakSource\DEM_OPR_EDT_06_09_021.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeA
+ndPakSource\STS_OPR_DM_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_OPR_EDT_06_09A_036.pak,\\awsusdmkfsxn01.jn
+j.com\mdd_dev5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\last\last_DEV_20251007115356\pak\ATOM_SP_OPR_EDT_last_DEV_20251007115356.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp
+\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_ortho_cust_OPR_EDT_last_DEV_20250725130525.pak}" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn0
+1.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartners\sppredev5\editor" "/CUPROFILE={Data Validation DRP Regional JP}" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMP_JNJ_MD
+_ATOMSP_PREDEV5\OMPartners\omdata\sppredev5\user\PSanjayS\editor\operational\Data Validation DRP Regional JP"  /VIEW "/%LICENSEDOMAINGENERAL%"  "/PROFILER=NORMAL"  /ProfilerUniqueFil
+eName /archivefiles=profiler_log*.tsv
+[DEBUG] PID: 22704, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\components\agent_core\1.3.0.2/rapid7_agent_core.exe"
+[DEBUG] PID: 20272, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\components\endpoint_broker\1.9.0.3/rapid7_endpoint_broker.exe"
+[DEBUG] PID: 1696, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\components\insight_agent\4.0.13.32/ir_agent.exe"
+[DEBUG] PID: 26372, Owner: SYSTEM, CMD: "c:\Program Files\Rapid7\Insight Agent\components\insight_agent\4.0.13.32\ir_agent.exe" "--multiprocessing-fork" "parent_pid=1696" "pipe_handl
+e=2004"
+[DEBUG] PID: 32528, Owner: PSanjayS, CMD: notepad.exe D:\OMClient\sppredev5\user\PSanjayS\editor\operational\Data Validation DRP Regional JP\ompeditor_06_09_020_x64u.out
+[DEBUG] PID: 22248, Owner: SA-ITS-APSMDINT-LAB, CMD: "D:\Program Files (x86)\Notepad++\notepad++.exe" 
+[DEBUG] PID: 8008, Owner: PSanjayS, CMD: "D:\OMClient\BIN\ompeditor_06_09_020_x64u\ompeditor_06_09_020_x64u.exe" "/database={OMP_JNJ_MD_ATOMSP_PREDEV5_utl@DNV35003}" "/PAK={\\awsusdm
+kfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\ExeAndPakSource\Dispatcher_EDT_06_09A_008.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\Solutions\LSS\last\06_0
+9A_036\pak\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\last\last_DEV_20251007115356\pak\ATOM_SP_UTL_DSP_last_DEV
+_20251007115356.pak,\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20250725130525\pak\jnj_ortho_cust_UTL_DSP_last_DEV_202
+50725130525.pak}" "/VIEW" "/cuprof={OMP Dispatcher Viewer}" "/CUApplication=DSP" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartners\sp
+predev5\dispatcher" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartners\omdata\sppredev5\user\PSanjayS\dispatcher\viewer"
+[DEBUG] PID: 14028, Owner: PSanjayS, CMD: notepad.exe \\awsusdmkfsxn01.jnj.com\mdd_dev5_omp\OMP_JNJ_MD_ATOMSP_PREDEV5\OMPartners\omdata\sppredev5\sapintegrator\operational\sapintegra
+tor2\sapintegrator2_06_09_029_x64u_38072_1.dsp.out
+[DEBUG] PID: 26364, Owner: Admin_VPasupu1, CMD: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartner
+s\development\bin\menu\base\OMPartners.men" "/TITLE={OMP Plus - development}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin\custo
+merlogo.png" /NOSPLASH "/cudir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_tst_omp\
+OMP_JNJ_MD_ATOM_LAB\OMPartners\omdata\development\user\admin_vpasupu1\OMMenu" 
+[DEBUG] PID: 28712, Owner: Admin_VPasupu1, CMD: "D:\OMClient\bin\ommenu_09_09_023_x64u\ommenu_09_09_023_x64u.exe"  "\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartn
+ers\spdevelopment\bin\menu\base\OMPartners.men" "/TITLE={OMP Plus - spdevelopment}" "/customerlogo=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\spdevelopment
+\bin\customerlogo.png" /NOSPLASH "/cudir=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\spdevelopment\bin" "/archivefiles=*.*" "/logdir=\\awsusdmkfsxn01.jnj.co
+m\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\omdata\spdevelopment\user\admin_vpasupu1\OMMenu" 
+[DEBUG] PID: 22732, Owner: Admin_VPasupu1, CMD: "D:\OMClient\BIN\profilemanager_06_09_037_x64u\profilemanager_06_09_037_x64u.exe"   "/database={OMP_JNJ_MD_ATOMSP_DEV_utl@DNV35003}" "
+/PAK={\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\META_PFM_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\R
+EF_UTL_PFM_06_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\META_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_0
+9\ExeAndPakSource\STS_UTL_DM_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\META_SCI_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev
+\OMPInstallpoint\R06_09\ExeAndPakSource\REF_UTL_SCI_06_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\META_SAI2_06_09_020.pak,\\awsusdmkfsxn01
+.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\REF_UTL_SAI2_06_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\STS_UTL_SAI2_06_09_
+020.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\MU_UTL_SetupManager_EDT_06_09_025.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\
+ExeAndPakSource\REF_UTL_SAP_EDT_06_09_028.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\OmpDataInspector_EDT_06_09_020.pak,\\awsusdmkfsxn01.jnj.com\
+mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\Dispatcher_EDT_06_09A_008.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\REF_UTL_EDT_06_09_028.pak
+,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_UTL_EDT_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\
+Solutions\LSS\last\06_09A_036\pak\LSS_UTL_MU_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_UTL_DIN_06_09A_036.pak,\
+\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_UTL_SAPBS_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\
+Solutions\LSS\last\06_09A_036\pak\LSS_UTL_SAPADV_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_14\pak\A
+TOM_SP_UTL_EDT_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_MU_04_07b_14.pak,\\awsus
+dmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_DIN_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPIn
+stallpoint\R06_09\Solutions\JnJ_GlobalOrtho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_SAPBS_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_G
+lobalOrtho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_SAPADV_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_
+20251003161925\pak\jnj_ortho_cust_UTL_EDT_last_DEV_20251003161925.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251
+003161925\pak\jnj_ortho_cust_UTL_MU_last_DEV_20251003161925.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161
+925\pak\jnj_ortho_cust_UTL_DIN_last_DEV_20251003161925.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161925\p
+ak\jnj_ortho_cust_UTL_SAPBS_last_DEV_20251003161925.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161925\pak\
+jnj_ortho_cust_UTL_SAPADV_last_DEV_20251003161925.pak}"                                                                     "/ADMIN" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\
+mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\spdevelopment\profilemanager" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\omdata\spdevelopment\user\ad
+min_vpasupu1\profilemanager"
+[DEBUG] PID: 28356, Owner: Admin_VPasupu1, CMD: "\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\ompeditor_06_09_035_x64u\ompeditor_06_09_035_x64u.exe" "/
+database={OMP_JNJ_MD_ATOMSP_DEV_utl@DNV35003}" "/PAK={\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\ExeAndPakSource\Dispatcher_EDT_06_09A_008.pak,\\awsusdmkfsxn01.jnj.c
+om\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\LSS\last\06_09A_036\pak\LSS_UTL_DSP_06_09A_036.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrt
+ho\releases\R04_07b\04_07b_14\pak\ATOM_SP_UTL_DSP_04_07b_14.pak,\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMPInstallpoint\R06_09\Solutions\JnJ_GlobalOrtho\customerpak\last_DEV_20251003161
+925\pak\jnj_ortho_cust_UTL_DSP_last_DEV_20251003161925.pak}" "/VIEW" "/cuprof={OMP Dispatcher Viewer}" "/CUApplication=DSP" "/SET_FM_APPLICATIONDIR=\\awsusdmkfsxn01.jnj.com\mdd_omp_d
+ev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\spdevelopment\dispatcher" "/logdir=\\awsusdmkfsxn01.jnj.com\mdd_omp_dev\OMP_JNJ_MD_ATOMSP_DEV\OMPartners\omdata\spdevelopment\user\admin_vpasupu1\
+dispatcher\viewer"
+[DEBUG] PID: 21840, Owner: SYSTEM, CMD: NoCommandLine
+[DEBUG] PID: 3884, Owner: SYSTEM, CMD: C:\Windows\system32\vssvc.exe
+[DEBUG] PID: 10036, Owner: SYSTEM, CMD: "C:\Program Files (x86)\Tanium\Tanium Client\TaniumClient.exe" -a
 
-    $parts      = $line -split '\s+'
-    $schemSrv   = $parts[0]
-    $osuser     = $parts[1]
-    $machineRaw = $parts[2]
-    $machine    = $machineRaw -replace '^.*\\',''   # strip domain if present
-    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
+[COMPLETED] Process scan and cleanup finished!
 
-    $entries += [PSCustomObject]@{
-        SCHEMATIC = $schemSrv
-        OSUSER    = $osuser
-        MACHINE   = $machine
-        SESSION   = $sessionNum
-    }
-}
-
-# Current host details
-$hostMachine = $env:COMPUTERNAME
-$hostOSUser  = $env:USERNAME
-
-Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
-Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
-
-foreach ($entry in $entries) {
-    $schematic = $entry.SCHEMATIC
-    $osuser    = $entry.OSUSER
-    $machine   = $entry.MACHINE
-
-    Write-Host "`n=============================" -ForegroundColor DarkGray
-    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
-    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
-    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
-
-    try {
-        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
-
-        # Get all processes remotely
-        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
-
-        if (-not $procs) {
-            Write-Host "[DEBUG] No processes returned from $machine" -ForegroundColor Red
-            continue
-        }
-
-        foreach ($p in $procs) {
-            $cmd = $p.CommandLine
-            $owner = ""
-            try {
-                $ownerObj = $p.GetOwner()
-                $owner = $ownerObj.User
-            } catch {
-                Write-Host ("[WARN] Could not read owner for PID {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor DarkYellow
-            }
-
-            # Safe owner string
-            if ($owner -eq "" -or $owner -eq $null) { $ownerSafe = "Unknown" } else { $ownerSafe = $owner }
-            if ($cmd -eq $null) { $cmdSafe = "NoCommandLine" } else { $cmdSafe = $cmd }
-
-            Write-Host ("[DEBUG] PID: {0}, Owner: {1}, CMD: {2}" -f $p.ProcessId, $ownerSafe, $cmdSafe) -ForegroundColor DarkGray
-
-            # Step 1: Username match (case-insensitive) — fallback to command line if GetOwner fails
-            $userMatch = ($ownerSafe -ieq $osuser) -or ($cmdSafe -match $osuser)
-
-            # Step 2: Exact schematic match in command line (case-insensitive)
-            $schematicMatch = ($cmdSafe -match [regex]::Escape($schematic))
-
-            if ($userMatch -and $schematicMatch) {
-                Write-Host ("[MATCH] {0} running schematic '{1}' (PID: {2})" -f $osuser, $schematic, $p.ProcessId) -ForegroundColor Green
-                Write-Host ("[CMD] Command Line: {0}" -f $cmdSafe) -ForegroundColor Cyan
-
-                # Kill the process remotely
-                try {
-                    $result = $p.Terminate()
-                    if ($result.ReturnValue -eq 0) {
-                        Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
-                    } else {
-                        Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
-                    }
-                }
-                catch {
-                    Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
-                }
-            }
-        }
-    }
-    catch {
-        Write-Host ("[ERROR] Failed to query {0}: {1}" -f $machine, $_.Exception.Message) -ForegroundColor Red
-    }
-}
-
-Write-Host "`n[COMPLETED] Process scan and cleanup finished!" -ForegroundColor Cyan
+PS C:\Windows\system32>
