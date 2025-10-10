@@ -1,13 +1,8 @@
-OMP_JNJ_MD_ATOM_LAB_UTL        admin_vpasupu1                 JNJ\AWSDMKNVAW0002                      2                                                                                                 
-
-##### MAIN SECTION #####
-
 Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
 $data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
 
 Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
 
-# Parse input file into objects
 $entries = @()
 foreach ($line in $data) {
     if ([string]::IsNullOrWhiteSpace($line)) { continue }
@@ -16,74 +11,49 @@ foreach ($line in $data) {
     $schemSrv   = $parts[0]
     $osuser     = $parts[1]
     $machineRaw = $parts[2]
-    $machine    = $machineRaw -replace '^.*\\',''   # strip JNJ\ if present
+    $machine    = $machineRaw -replace '^.*\\',''
+    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
 
     $entries += [PSCustomObject]@{
         SCHEMATIC = $schemSrv
         OSUSER    = $osuser
         MACHINE   = $machine
+        SESSION   = $sessionNum
     }
 }
 
-# Group entries by machine
-$groupedByMachine = $entries | Group-Object MACHINE
-
-# Current host details
-$hostMachine = $env:COMPUTERNAME
-$hostOSUser  = $env:USERNAME
-
-Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
-Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
-
-foreach ($group in $groupedByMachine) {
-    $machine = $group.Name
-    $osusers = $group.Group.OSUSER | Select-Object -Unique
+foreach ($entry in $entries) {
+    $schematic = $entry.SCHEMATIC
+    $osuser    = $entry.OSUSER
+    $machine   = $entry.MACHINE
 
     Write-Host "`n=============================" -ForegroundColor DarkGray
-    Write-Host "[DEBUG] Processing MACHINE: $machine" -ForegroundColor Magenta
-    Write-Host "[DEBUG] Target OSUSER list: $($osusers -join ', ')" -ForegroundColor Cyan
+    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
+    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
+    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
 
     try {
-        Write-Host "[DEBUG] Querying active sessions on $machine ..." -ForegroundColor Yellow
-        $sessions = @(query user /server:$machine 2>&1)
+        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
+        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
 
-        if ($sessions -and $sessions -notmatch "Error") {
-            Write-Host "[DEBUG] Raw sessions output from $machine" -ForegroundColor Yellow
-            $sessions | ForEach-Object { Write-Host "    $_" -ForegroundColor DarkYellow }
+        foreach ($p in $procs) {
+            $owner = $p.GetOwner().User
+            $cmd   = $p.CommandLine
 
-            foreach ($osuser in $osusers) {
-                # Host machine special protection
-                if (($machine -ieq $hostMachine) -and ($osuser -ieq $hostOSUser)) {
-                    Write-Host "[SAFE] Skipping host OSUSER $osuser on $machine" -ForegroundColor Cyan
-                    continue
+            if (($owner -ieq $osuser) -and ($cmd -match $schematic)) {
+                Write-Host "[MATCH] $owner running schematic '$schematic' (PID: $($p.ProcessId))" -ForegroundColor Green
+                try {
+                    Stop-Process -Id $p.ProcessId -ComputerName $machine -Force
+                    Write-Host "[KILLED] Process $($p.ProcessId) on $machine" -ForegroundColor Red
                 }
-
-                # Find active sessions for this OSUSER
-                $matched = $sessions | Where-Object {$_ -match $osuser -and $_ -match "Active"}
-                if ($matched) {
-                    foreach ($m in $matched) {
-                        Write-Host "[DEBUG] Matched line for $osuser $m" -ForegroundColor Green
-                        $SessionID = ($m -split '\s+')[2]
-                        Write-Host "[DEBUG] Extracted Session ID: $SessionID" -ForegroundColor Green
-
-                        Write-Host "[DEBUG] Attempting to logoff $osuser (Session $SessionID) on $machine..." -ForegroundColor Yellow
-                        logoff $SessionID /server:$machine
-                        Write-Host "[$machine] OSUSER $osuser (Session $SessionID) logged off." -ForegroundColor Green
-                    }
-                }
-                else {
-                    Write-Host "[$machine] OSUSER $osuser not logged in." -ForegroundColor Yellow
+                catch {
+                    Write-Host "[ERROR] Unable to kill process $($p.ProcessId) on $machine: $($_.Exception.Message)" -ForegroundColor Red
                 }
             }
         }
-        else {
-            Write-Host "[DEBUG] No valid sessions returned from $machine" -ForegroundColor Red
-            $sessions | ForEach-Object { Write-Host "    $_" -ForegroundColor DarkYellow }
-            Write-Host "[$machine] Unable to fetch RDP sessions." -ForegroundColor Yellow
-        }
     }
     catch {
-        Write-Host "[DEBUG] Exception occurred while processing $machine" -ForegroundColor Red
-        Write-Host "[$machine] Error: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "[ERROR] Failed to query $machine : $($_.Exception.Message)" -ForegroundColor Red
     }
 }
+
