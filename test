@@ -1,101 +1,98 @@
-PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
-[DEBUG] Reading input file...
-[DEBUG] Total lines read from file: 1
-[DEBUG] Host Machine : AWSDMKNVAW0002
-[DEBUG] Host OSUSER  : SA-ITS-APSMDINT-LAB
+##### MAIN SECTION #####
 
-=============================
-[DEBUG] Processing MACHINE : AWSDMKNVAW0002
-[DEBUG] Target OSUSER      : admin_vpasupu1
-[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
-[DEBUG] Querying processes on AWSDMKNVAW0002 ...
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 12056) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 12056 on AWSDMKNVAW0002
-[MATCH] Process 'rapid7_endpoint_broker.exe' (PID: 8772) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 8772 on AWSDMKNVAW0002
-[MATCH] Process 'rapid7_agent_core.exe' (PID: 21276) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 21276 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 18748) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 18748 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 11396) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 11396 on AWSDMKNVAW0002
-[MATCH] Process 'ir_agent.exe' (PID: 23860) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 23860 on AWSDMKNVAW0002
-[MATCH] Process 'ir_agent.exe' (PID: 26752) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 26752 on AWSDMKNVAW0002
-[MATCH] Process 'cmd.exe' (PID: 23800) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 23800 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 28212) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 28212 on AWSDMKNVAW0002
-[MATCH] Process 'cmd.exe' (PID: 9876) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 9876 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 23772) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 23772 on AWSDMKNVAW0002
-[MATCH] Process 'cmd.exe' (PID: 13680) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 13680 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 32224) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 32224 on AWSDMKNVAW0002
-[MATCH] Process 'cmd.exe' (PID: 9808) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 9808 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_035_x64u.exe' (PID: 12788) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 12788 on AWSDMKNVAW0002
-[MATCH] Process 'cmd.exe' (PID: 5532) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 5532 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 14732) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 14732 on AWSDMKNVAW0002
-[MATCH] Process 'cmd.exe' (PID: 28532) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 28532 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 12332) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 12332 on AWSDMKNVAW0002
-[MATCH] Process 'notepad.exe' (PID: 17464) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 17464 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 6812) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 6812 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 16072) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 16072 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 9752) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 9752 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 15948) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 15948 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 12864) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 12864 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 20284) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 20284 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 18964) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 18964 on AWSDMKNVAW0002
-[MATCH] Process 'notepad++.exe' (PID: 16012) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 16012 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 12048) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 12048 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 10528) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 10528 on AWSDMKNVAW0002
-[MATCH] Process 'TaniumCX.exe' (PID: 28604) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 28604 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 32340) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 32340 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 16232) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 16232 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 15768) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 15768 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 25196) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 25196 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 31540) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 31540 on AWSDMKNVAW0002
-[MATCH] Process 'notepad.exe' (PID: 8872) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 8872 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_020_x64u.exe' (PID: 13936) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 13936 on AWSDMKNVAW0002
-[MATCH] Process 'notepad.exe' (PID: 1412) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 1412 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 24056) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 24056 on AWSDMKNVAW0002
-[MATCH] Process 'ommenu_09_09_023_x64u.exe' (PID: 25512) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 25512 on AWSDMKNVAW0002
-[MATCH] Process 'ompeditor_06_09_035_x64u.exe' (PID: 7000) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 7000 on AWSDMKNVAW0002
-[MATCH] Process 'profilemanager_06_09_037_x64u.exe' (PID: 10464) matches schematic 'OMP_JNJ_MD_ATOM_LAB_UTL'
-[KILLED] Process 10464 on AWSDMKNVAW0002
+Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
+$data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
 
-[COMPLETED] Process scan and cleanup finished!
+if (-not $data -or $data.Count -eq 0) {
+    Write-Host "[ERROR] Input file empty or not found!" -ForegroundColor Red
+    exit
+}
 
-PS C:\Windows\system32> 
+Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
+
+# Parse input file into objects
+$entries = @()
+foreach ($line in $data) {
+    if ([string]::IsNullOrWhiteSpace($line)) { continue }
+
+    $parts      = $line -split '\s+'
+    $schemSrv   = $parts[0]
+    $osuser     = $parts[1]
+    $machineRaw = $parts[2]
+    $machine    = $machineRaw -replace '^.*\\',''   # strip domain if present
+    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
+
+    $entries += [PSCustomObject]@{
+        SCHEMATIC = $schemSrv
+        OSUSER    = $osuser
+        MACHINE   = $machine
+        SESSION   = $sessionNum
+    }
+}
+
+# Current host details
+$hostMachine = $env:COMPUTERNAME
+$hostOSUser  = $env:USERNAME
+
+Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
+Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
+
+foreach ($entry in $entries) {
+    $schematic = $entry.SCHEMATIC
+    $osuser    = $entry.OSUSER
+    $machine   = $entry.MACHINE
+
+    Write-Host "`n=============================" -ForegroundColor DarkGray
+    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
+    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
+    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
+
+    try {
+        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
+
+        # Get all processes remotely
+        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
+
+        if (-not $procs) {
+            Write-Host "[DEBUG] No processes returned from $machine" -ForegroundColor Red
+            continue
+        }
+
+        foreach ($p in $procs) {
+            $cmd = $p.CommandLine
+            $owner = ""
+            try {
+                $ownerObj = $p.GetOwner()
+                $owner = $ownerObj.User
+            } catch {
+                Write-Host ("[WARN] Could not read owner for PID {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor DarkYellow
+            }
+
+            # Step 1: Username match (case-insensitive)
+            if ($owner -ieq $osuser) {
+                # Step 2: Partial schematic match in command line
+                if ($cmd -like "*$($schematic.Split('_UTL')[0])*") {
+                    Write-Host ("[MATCH] $owner running schematic '{0}' (PID: {1})" -f $schematic, $p.ProcessId) -ForegroundColor Green
+
+                    # Kill the process remotely
+                    try {
+                        $result = $p.Terminate()
+                        if ($result.ReturnValue -eq 0) {
+                            Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
+                        } else {
+                            Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
+                        }
+                    }
+                    catch {
+                        Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
+                    }
+                }
+            }
+        }
+    }
+    catch {
+        Write-Host ("[ERROR] Failed to query {0}: {1}" -f $machine, $_.Exception.Message) -ForegroundColor Red
+    }
+}
+
+Write-Host "`n[COMPLETED] Process scan and cleanup finished!" -ForegroundColor Cyan
