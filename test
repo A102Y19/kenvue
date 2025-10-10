@@ -1,17 +1,97 @@
-PS C:\Windows\system32> \\awsusdmkfsxn01.jnj.com\mdd_tst_omp\OMP_JNJ_MD_ATOM_LAB\OMPartners\development\dispatcher\bin\Automation\PAK\Remove_Active_Users3.ps1
-[DEBUG] Reading input file...
-[DEBUG] Total lines read from file: 1
-[DEBUG] Host Machine : AWSDMKNVAW0002
-[DEBUG] Host OSUSER  : SA-ITS-APSMDINT-LAB
+##### MAIN SECTION #####
 
-=============================
-[DEBUG] Processing MACHINE : AWSDMKNVAW0002
-[DEBUG] Target OSUSER      : admin_vpasupu1
-[DEBUG] Target SCHEMATIC   : OMP_JNJ_MD_ATOM_LAB_UTL
-[DEBUG] Querying processes on AWSDMKNVAW0002 ...
-[WARN] Failed to read owner for PID 32208 on AWSDMKNVAW0002: Exception calling "GetOwner" : "Not found "
-[INFO] No matching processes found for admin_vpasupu1 / OMP_JNJ_MD_ATOM_LAB_UTL on AWSDMKNVAW0002
+Write-Host "[DEBUG] Reading input file..." -ForegroundColor Magenta
+$data = Get-Content "\\awsusdmlfsxn01.jnj.com\opt_qa_omp_na\Automation_Scripts\Optimus_QA2_Scripts\PAK\log\servers.txt"
 
-[COMPLETED] Process scan and cleanup finished!
+if (-not $data -or $data.Count -eq 0) {
+    Write-Host "[ERROR] Input file empty or not found!" -ForegroundColor Red
+    exit
+}
 
-PS C:\Windows\system32> 
+Write-Host "[DEBUG] Total lines read from file: $($data.Count)" -ForegroundColor Magenta
+
+# Parse input file into objects
+$entries = @()
+foreach ($line in $data) {
+    if ([string]::IsNullOrWhiteSpace($line)) { continue }
+
+    $parts      = $line -split '\s+'
+    $schemSrv   = $parts[0]
+    $osuser     = $parts[1]
+    $machineRaw = $parts[2]
+    $machine    = $machineRaw -replace '^.*\\',''   # strip domain if present
+    $sessionNum = if ($parts.Count -ge 4) { $parts[3] } else { "" }
+
+    $entries += [PSCustomObject]@{
+        SCHEMATIC = $schemSrv
+        OSUSER    = $osuser
+        MACHINE   = $machine
+        SESSION   = $sessionNum
+    }
+}
+
+# Current host details
+$hostMachine = $env:COMPUTERNAME
+$hostOSUser  = $env:USERNAME
+
+Write-Host "[DEBUG] Host Machine : $hostMachine" -ForegroundColor Cyan
+Write-Host "[DEBUG] Host OSUSER  : $hostOSUser"  -ForegroundColor Cyan
+
+foreach ($entry in $entries) {
+    $schematic = $entry.SCHEMATIC
+    $osuser    = $entry.OSUSER
+    $machine   = $entry.MACHINE
+
+    Write-Host "`n=============================" -ForegroundColor DarkGray
+    Write-Host "[DEBUG] Processing MACHINE : $machine" -ForegroundColor Magenta
+    Write-Host "[DEBUG] Target OSUSER      : $osuser" -ForegroundColor Cyan
+    Write-Host "[DEBUG] Target SCHEMATIC   : $schematic" -ForegroundColor Cyan
+
+    try {
+        Write-Host "[DEBUG] Querying processes on $machine ..." -ForegroundColor Yellow
+
+        # Get all processes remotely
+        $procs = Get-WmiObject Win32_Process -ComputerName $machine -ErrorAction Stop
+
+        if (-not $procs) {
+            Write-Host "[DEBUG] No processes returned from $machine" -ForegroundColor Red
+            continue
+        }
+
+        foreach ($p in $procs) {
+            try {
+                $ownerObj = $p.GetOwner()
+                $owner = $ownerObj.User
+                $cmd   = $p.CommandLine
+
+                # Step 1: Match username
+                if ($owner -ieq $osuser) {
+                    # Step 2: Match schematic in command line
+                    if ($cmd -match [regex]::Escape($schematic)) {
+                        Write-Host ("[MATCH] $owner running schematic '{0}' (PID: {1})" -f $schematic, $p.ProcessId) -ForegroundColor Green
+                        # Kill the process remotely
+                        try {
+                            $result = $p.Terminate()
+                            if ($result.ReturnValue -eq 0) {
+                                Write-Host ("[KILLED] Process {0} on {1}" -f $p.ProcessId, $machine) -ForegroundColor Red
+                            } else {
+                                Write-Host ("[ERROR] Failed to kill process {0} on {1}. ReturnValue: {2}" -f $p.ProcessId, $machine, $result.ReturnValue) -ForegroundColor Red
+                            }
+                        }
+                        catch {
+                            Write-Host ("[ERROR] Exception killing process {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor Red
+                        }
+                    }
+                }
+            }
+            catch {
+                Write-Host ("[WARN] Could not read owner for PID {0} on {1}: {2}" -f $p.ProcessId, $machine, $_.Exception.Message) -ForegroundColor DarkYellow
+            }
+        }
+    }
+    catch {
+        Write-Host ("[ERROR] Failed to query {0}: {1}" -f $machine, $_.Exception.Message) -ForegroundColor Red
+    }
+}
+
+Write-Host "`n[COMPLETED] Process scan and cleanup finished!" -ForegroundColor Cyan
